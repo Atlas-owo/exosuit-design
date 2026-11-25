@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f9fbf8">
+  <meta name="description" content="Explore open, semi-open and embedded soft exosuit designs through interactive 3D models and guided detail views.">
+  <title>wearable exosuit visual design</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/dm-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="vendor/model-viewer.min.js"></script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#explorer">Skip to the model explorer</a>
+  <header class="site-header">
+    <a class="wordmark" href="./" aria-label="SARTEXO home">SARTEXO<span></span></a>
+    <button class="text-button about-trigger" type="button">About the study <span class="information-icon" aria-hidden="true">i</span></button>
+  </header>
+  <main class="page-shell" id="explorer">
+    <section class="intro" aria-labelledby="page-title">
+      <h1 id="page-title">wearable exosuit visual design</h1>
+    </section>
+    <nav class="design-tabs" role="tablist" aria-label="Integration approach">
+      <button id="tab-B" class="design-tab is-active" role="tab" type="button" data-design="B" aria-selected="true" aria-controls="design-panel">
+        <span><strong>Open</strong><small>Independent modules</small></span><span class="design-code">B</span>
+      </button>
+      <button id="tab-A" class="design-tab" role="tab" type="button" data-design="A" aria-selected="false" aria-controls="design-panel" tabindex="-1">
+        <span><strong>Semi-open</strong><small>A shared vest carrier</small></span><span class="design-code">A</span>
+      </button>
+      <button id="tab-D" class="design-tab" role="tab" type="button" data-design="D" aria-selected="false" aria-controls="design-panel" tabindex="-1">
+        <span><strong>Embedded</strong><small>Integrated into the garment</small></span><span class="design-code">D</span>
+      </button>
+    </nav>
+    <div class="workspace">
+      <section class="viewer-panel" aria-label="Interactive 3D model">
+        <div class="viewer-topbar">
+          <span class="placeholder-label"><span aria-hidden="true" class="cube-icon"></span><span id="model-label">Schematic 3D placeholder</span></span>
+          <button class="icon-button" id="fullscreen-button" type="button" aria-label="Enter full screen" title="Full screen">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 4H4v4m12-4h4v4M4 16v4h4m12-4v4h-4"/></svg>
+          </button>
+        </div>
+        <model-viewer id="model-viewer" src="assets/models/B.glb"
+          alt="Schematic open-harness exosuit on a faceless mannequin."
+          camera-controls disable-pan interaction-prompt="none" touch-action="pan-y"
+          camera-orbit="145deg 83deg 3.65m" camera-target="0m 1.06m 0m" field-of-view="33deg"
+          min-camera-orbit="auto 20deg 0.35m" max-camera-orbit="auto 155deg 5m"
+          shadow-intensity="0.55" shadow-softness="1" exposure="1.05" tone-mapping="neutral"
+          interpolation-decay="90" loading="eager">
+          <button class="hotspot" slot="hotspot-module" type="button" data-topic="module" data-position="0.092m 1.37m -0.18m" data-normal="0m 0m -1m" data-visibility-attribute="visible" aria-label="Explore the muscle module"><span aria-hidden="true">+</span><span class="hotspot-label">Muscle module</span></button>
+          <button class="hotspot" slot="hotspot-cooling" type="button" data-topic="cooling" data-position="0.092m 1.12m -0.21m" data-normal="0m 0m -1m" data-visibility-attribute="visible" aria-label="Explore cooling and output"><span aria-hidden="true">+</span><span class="hotspot-label">Cooling &amp; output</span></button>
+          <button class="hotspot" slot="hotspot-anchors" type="button" data-topic="anchors" data-position="0.1m 0.82m -0.11m" data-normal="0m 0m -1m" data-visibility-attribute="visible" aria-label="Explore the thigh anchors"><span aria-hidden="true">+</span><span class="hotspot-label">Thigh anchors</span></button>
+          <button class="hotspot" slot="hotspot-battery" type="button" data-topic="battery" data-position="0.135m 1.45m 0.185m" data-normal="0m 0m 1m" data-visibility-attribute="visible" aria-label="Explore the battery mount"><span aria-hidden="true">+</span><span class="hotspot-label">Battery mount</span></button>
+        </model-viewer>
+        <div class="loading-overlay" id="loading-overlay" role="status"><span class="spinner" aria-hidden="true"></span><span>Preparing the 3D model</span><span class="progress-track"><span id="loading-bar"></span></span></div>
+        <div class="load-error" id="load-error" role="alert" hidden><strong>The 3D model could not load.</strong><p>You can still explore its design reference.</p><button id="retry-button" class="primary-button" type="button">Try again</button></div>
+        <div class="viewer-bottom">
+          <div class="view-presets" role="group" aria-label="Model viewpoints">
+            <button class="view-button is-active" type="button" data-view="overview" aria-pressed="true">Overview</button>
+            <button class="view-button" type="button" data-view="front" aria-pressed="false">Front</button>
+            <button class="view-button" type="button" data-view="back" aria-pressed="false">Back</button>
+            <button class="view-button" type="button" data-view="side" aria-pressed="false">Left side</button>
+            <span class="preset-divider" aria-hidden="true"></span>
+            <button id="reset-button" class="icon-button reset-button" type="button" aria-label="Reset model view" title="Reset view"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1.6 7.1M4 4v6h6"/></svg></button>
+          </div>
+          <p class="interaction-hint"><span class="desktop-hint">Drag to rotate <span>·</span> Scroll to zoom</span><span class="touch-hint">Drag to rotate <span>·</span> Pinch to zoom</span></p>
+        </div>
+      </section>
+      <aside class="detail-panel" id="design-panel" role="tabpanel" aria-labelledby="tab-B" tabindex="0">
+        <p class="detail-eyebrow" id="detail-eyebrow">OPEN INTEGRATION · DESIGN B</p>
+        <h2 id="detail-title">Independent modules,<br>an open harness.</h2>
+        <p class="detail-description" id="detail-description">Two protected textile modules connect individually to a shoulder harness and high thigh cuffs. Open chest and side areas keep the carrier visually light.</p>
+        <div class="principle-block"><h3 id="principle-title">Design principle</h3><p id="principle-description">Keep each module, attachment, and fit adjustment identifiable.</p></div>
+        <ul id="keyword-list" class="keyword-list" aria-label="Design keywords"><li>Modular</li><li>Adjustable</li><li>Open coverage</li></ul>
+        <div class="reference-block">
+          <button id="reference-preview" class="reference-preview" type="button" aria-label="Open design reference images"><img id="reference-thumbnail" src="assets/references/B-reference.jpg" alt="Design B front and back concept reference" width="1200" height="800"><span class="reference-image-label">Concept reference</span><span class="reference-expand" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M8 4H4v4m12-4h4v4M4 16v4h4m12-4v4h-4"/></svg></span></button>
+          <button id="reference-open" class="reference-caption" type="button"><span>View the design reference</span></button>
+        </div>
+        <div class="context-block"><h3 id="context-title">Proposed applications</h3><p id="context-description">Warehouse picking, event installation, and horticulture.</p></div>
+      </aside>
+    </div>
+    <nav class="detail-navigation" aria-label="Explore model details"><span class="detail-nav-label">Explore</span><div class="detail-buttons">
+      <button class="detail-button is-active" type="button" data-topic="overview" aria-pressed="true">Overview</button>
+      <button class="detail-button" type="button" data-topic="module" aria-pressed="false">Muscle module</button>
+      <button class="detail-button" type="button" data-topic="cooling" aria-pressed="false">Cooling &amp; output</button>
+      <button class="detail-button" type="button" data-topic="anchors" aria-pressed="false">Thigh anchors</button>
+      <button class="detail-button" type="button" data-topic="battery" aria-pressed="false">Battery mount</button>
+    </div></nav>
+    <footer class="site-footer"><p>Open, semi-open, and embedded integration.</p><button class="text-button about-trigger" type="button">About the models</button></footer>
+  </main>
+  <dialog class="reference-dialog" id="reference-dialog" aria-labelledby="reference-dialog-title">
+    <div class="dialog-header"><div><p class="eyebrow" id="reference-dialog-kicker">DESIGN B</p><h2 id="reference-dialog-title">Open integration</h2></div><button class="icon-button close-dialog" type="button" aria-label="Close reference images"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <div class="reference-view-switch" role="group" aria-label="Reference view"><button class="reference-view-button is-active" data-reference-view="front-rear" type="button" aria-pressed="true">Front &amp; back</button><button class="reference-view-button" data-reference-view="side" type="button" aria-pressed="false">Left profile</button></div>
+    <div class="reference-full-frame"><img id="reference-full-image" src="assets/references/B-reference.jpg" alt="Design B front and back concept render"></div><p class="reference-footnote">Design concept render. The semi-open design uses the BLUE v1 model; the open and embedded designs use schematic geometry.</p>
+  </dialog>
+  <dialog class="about-dialog" id="about-dialog" aria-labelledby="about-title">
+    <div class="dialog-header"><div><p class="eyebrow">ABOUT THE STUDY</p><h2 id="about-title">Three levels of integration.</h2></div><button class="icon-button close-dialog" type="button" aria-label="Close study information"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <p>This study explores how a protected textile assistance assembly connects to its carrier and to the wearer.</p>
+    <dl class="about-designs"><div><dt>Open · B</dt><dd>Individually bounded modules attach to an open, adjustable harness.</dd></div><div><dt>Semi-open · A</dt><dd>A contoured external module mounts on a shared vest carrier.</dd></div><div><dt>Embedded · D</dt><dd>The working region sits within the layered back garment panel.</dd></div></dl>
+    <h3>About the interactive models</h3><p>The semi-open design uses the textured BLUE v1 model. The open and embedded designs use purpose-built schematic placeholders. The reference images communicate the exterior design intent.</p><p>Active length, contraction travel, cooling, and fit remain under development. Application examples describe proposed uses for evaluation.</p>
+    <a class="notes-link" href="assets/SARTEXO_Design_Directions.md" download>Download the design notes</a>
+  </dialog>
+  <div class="sr-only" id="announcement" role="status" aria-live="polite"></div>
+</body>
+</html>

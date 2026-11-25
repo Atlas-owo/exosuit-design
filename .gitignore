@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+output/
+.playwright-cli/
+build/
+dist/assets/*.blend*
+dist/assets/BLUE_v1.glb
