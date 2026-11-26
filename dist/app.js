@@ -80,7 +80,7 @@ function updateCamera(jump = false) {
   const topicCamera = design.topics[selectedTopic].camera;
   const camera = {...topicCamera, ...(narrowViewport.matches ? topicCamera.mobile : {})};
   if (selectedTopic === "overview" && selectedView !== "overview") {
-    const angles = {front: "0deg", back: "180deg", side: "90deg"};
+    const angles = design.viewAngles || {front: "0deg", back: "180deg", side: "90deg"};
     camera.orbit = camera.orbit.replace(/^\S+/, angles[selectedView]);
   }
   viewer.minCameraOrbit = design.cameraLimits?.min || "auto 20deg 0.35m";
@@ -92,11 +92,15 @@ function updateCamera(jump = false) {
 }
 
 function updateHotspots() {
-  const positions = designs[selectedDesign].hotspots;
+  const design = designs[selectedDesign];
+  const positions = design.hotspots;
   for (const button of hotspots) {
     const position = positions[button.dataset.topic];
+    const normal = design.hotspotNormals?.[button.dataset.topic]
+      || (button.dataset.topic === "battery" ? "0m 0m 1m" : "0m 0m -1m");
     button.dataset.position = position;
-    viewer.updateHotspot?.({name: button.slot, position});
+    button.dataset.normal = normal;
+    viewer.updateHotspot?.({name: button.slot, position, normal});
   }
 }
 

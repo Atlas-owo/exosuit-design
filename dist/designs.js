@@ -20,16 +20,25 @@ export const designs = {
   B: {
     code: "B",
     label: "Open",
-    model: "assets/models/B.glb",
+    model: "assets/models/GREEN_v3-web.glb",
+    modelLabel: "GREEN v3 · 3D design model",
+    cameraLimits: {min: "auto 20deg 0.2m", max: "auto 155deg 4.5m"},
+    viewAngles: {front: "0deg", back: "180deg", side: "90deg"},
     reference: "assets/references/B-reference.jpg",
     sideReference: "assets/references/B-side.jpg",
-    alt: "Schematic open-harness exosuit with two independent rear textile modules, each with a local fan, and separate high thigh cuffs.",
+    alt: "Textured GREEN v3 open-harness exosuit with two independent rear textile modules, local fans, adjustable chest straps, and separate thigh cuffs over white work clothing.",
     theme: {accent: "#607347", dark: "#435532", soft: "#edf1e7"},
     hotspots: {
-      module: "0.092m 1.37m -0.18m",
-      cooling: "0.092m 1.12m -0.21m",
-      anchors: "0.1m 0.82m -0.11m",
-      battery: "0.135m 1.45m 0.185m"
+      module: "0.07m 0.76m -0.144m",
+      cooling: "0.065m 0.59m -0.144m",
+      anchors: "0.17m 0.31m -0.079m",
+      battery: "0.09m 0.8m 0.14m"
+    },
+    hotspotNormals: {
+      module: "0m 0m -1m",
+      cooling: "0m 0m -1m",
+      anchors: "0m 0m -1m",
+      battery: "0m 0m 1m"
     },
     topics: {
       overview: {
@@ -39,7 +48,10 @@ export const designs = {
         keywords: ["Modular", "Adjustable", "Open coverage"],
         contextTitle: "Proposed applications",
         context: "Warehouse picking, event installation, and horticulture.",
-        camera: overviewCamera
+        camera: {
+          target: "0m 0.49m 0m", orbit: "145deg 83deg 2.65m", fieldOfView: "33deg",
+          mobile: {target: "0m 0.445m 0m", orbit: "145deg 83deg 2.95m"}
+        }
       },
       module: {
         title: ["Two individually", "mounted modules."],
@@ -48,7 +60,7 @@ export const designs = {
         keywords: ["Independent mounting", "Flexible span", "Defined terminals"],
         contextTitle: "Detail to evaluate",
         context: "Alignment, movement relative to the harness, and access for inspection or replacement.",
-        camera: {target: "0m 1.35m -0.15m", orbit: "160deg 81deg 1.45m", fieldOfView: "33deg"}
+        camera: {target: "0m 0.74m -0.1m", orbit: "160deg 82deg 1.4m", fieldOfView: "33deg"}
       },
       cooling: {
         title: ["Local fans,", "defined outputs."],
@@ -57,7 +69,7 @@ export const designs = {
         keywords: ["Local cooling", "Output fitting", "Passive transfer"],
         contextTitle: "Detail to evaluate",
         context: "The airflow route through each long textile region and the clearance around the moving lower terminal.",
-        camera: {target: "0.055m 1.12m -0.17m", orbit: "150deg 82deg 0.88m", fieldOfView: "33deg"}
+        camera: {target: "0m 0.59m -0.11m", orbit: "180deg 85deg 0.9m", fieldOfView: "33deg"}
       },
       anchors: {
         title: ["Independent fit", "at each thigh."],
@@ -66,38 +78,43 @@ export const designs = {
         keywords: ["High cuffs", "Separate adjustment", "Open pelvis"],
         contextTitle: "Detail to evaluate",
         context: "Cuff migration during walking and bending, and the balance between the two transmission routes.",
-        camera: {target: "0m 0.87m -0.03m", orbit: "145deg 85deg 1.15m", fieldOfView: "33deg"}
+        camera: {target: "0m 0.31m -0.025m", orbit: "145deg 83deg 1.4m", fieldOfView: "33deg"}
       },
-      battery: batteryTopic
+      battery: {
+        ...batteryTopic,
+        description: "The external battery sits on the wearer's left shoulder rail, with visible front controls and a retaining strap above the waist belt.",
+        context: "Evaluate docking, cable retention, and release access alongside the harness adjustments.",
+        camera: {target: "0.09m 0.8m 0.11m", orbit: "-20deg 83deg 0.9m", fieldOfView: "33deg"}
+      }
     }
   },
   A: {
     code: "A",
     label: "Semi-open",
-    model: "assets/models/BLUE_v1-web.glb",
-    modelLabel: "BLUE v1 · 3D design model",
-    cameraLimits: {min: "auto 20deg 0.15m", max: "auto 155deg 3m"},
+    model: "assets/models/BLUE_v3-web.glb",
+    modelLabel: "BLUE v3 · 3D design model",
+    cameraLimits: {min: "auto 20deg 0.2m", max: "auto 155deg 4.5m"},
     reference: "assets/references/A-reference.jpg",
     sideReference: "assets/references/A-side.jpg",
-    alt: "Textured BLUE v1 semi-independent blue vest design, with a white carrier garment, rear assistance module, and external chest battery.",
+    alt: "Textured BLUE v3 semi-independent blue vest design, with a white carrier garment, rear assistance module, external chest battery, and front waist pouch.",
     theme: {accent: "#3b6c89", dark: "#294e64", soft: "#eaf1f5"},
     hotspots: {
-      module: "0.055m 0.565m -0.095m",
-      cooling: "0m 0.48m -0.115m",
-      anchors: "0.16m 0.105m -0.07m",
-      battery: "0.08m 0.525m 0.105m"
+      module: "0.075m 0.815m -0.13m",
+      cooling: "0m 0.715m -0.14m",
+      anchors: "0.21m 0.25m -0.052m",
+      battery: "0.08m 0.775m 0.14m"
     },
     topics: {
       overview: {
         title: ["A contoured module,", "a shared vest."],
-        description: "A blue zip-front vest carries a separate rear module over work clothing. Lateral thigh panels and adjustable bands connect the vest to the lower anchors.",
+        description: "A blue zip-front vest carries a separate rear module over work clothing. A front waist pouch, lateral thigh panels, and adjustable bands organize the upper and lower interfaces.",
         principle: "Use the vest as a common support while preserving a readable interface around the flexible module.",
         keywords: ["Shared carrier", "Contoured", "Semi-independent"],
         contextTitle: "Proposed applications",
         context: "Manufacturing, facility maintenance, and workshop tasks.",
         camera: {
-          target: "0m 0.34m 0m", orbit: "145deg 83deg 1.85m", fieldOfView: "33deg",
-          mobile: {target: "0m 0.31m 0m", orbit: "145deg 83deg 2.05m"}
+          target: "0m 0.49m 0m", orbit: "145deg 83deg 2.65m", fieldOfView: "33deg",
+          mobile: {target: "0m 0.445m 0m", orbit: "145deg 83deg 2.95m"}
         }
       },
       module: {
@@ -107,16 +124,16 @@ export const designs = {
         keywords: ["Contoured cover", "Bound edge", "Local mounting"],
         contextTitle: "Detail to evaluate",
         context: "Working-component clearance, airflow space, and lower-terminal travel through a bend.",
-        camera: {target: "0m 0.49m -0.06m", orbit: "160deg 82deg 0.95m", fieldOfView: "33deg"}
+        camera: {target: "0m 0.71m -0.08m", orbit: "160deg 82deg 1.35m", fieldOfView: "33deg"}
       },
       cooling: {
         title: ["A central fan,", "distinct load paths."],
-        description: "A central fan sits on the external blue back panel. Separate posterior straps continue from the lower vest toward the thigh anchors.",
+        description: "A central fan and lower outlet sit on the external blue back panel. Separate posterior straps continue from the lower vest toward the thigh anchors.",
         principle: "Let the fan, outlet, and load connections express their own roles within the assembly.",
-        keywords: ["Central fan", "External module", "Posterior straps"],
+        keywords: ["Central fan", "Lower outlet", "Posterior straps"],
         contextTitle: "Detail to evaluate",
         context: "Airflow through the rear module and clearance around the straps as the wearer bends.",
-        camera: {target: "0m 0.48m -0.09m", orbit: "180deg 85deg 0.58m", fieldOfView: "33deg"}
+        camera: {target: "0m 0.715m -0.12m", orbit: "180deg 85deg 0.84m", fieldOfView: "33deg"}
       },
       anchors: {
         title: ["Long lateral panels,", "lower thigh anchors."],
@@ -125,13 +142,13 @@ export const designs = {
         keywords: ["Lateral support", "Lower bands", "Open seat"],
         contextTitle: "Detail to evaluate",
         context: "Panel rotation, contact pressure, and alignment between the posterior straps and lower anchors.",
-        camera: {target: "0m 0.17m 0m", orbit: "130deg 83deg 1m", fieldOfView: "33deg"}
+        camera: {target: "0m 0.27m 0m", orbit: "130deg 83deg 1.4m", fieldOfView: "33deg"}
       },
       battery: {
         ...batteryTopic,
-        description: "The external battery sits on the wearer's left chest, with front-facing controls and a cable route toward the lower vest.",
+        description: "The external battery sits on the wearer's left chest, with front-facing controls and a retaining band above the waist pouch.",
         context: "The current model shows the battery housing and front controls. Docking, cable retention, and release access remain details to develop.",
-        camera: {target: "0.08m 0.525m 0.075m", orbit: "-20deg 83deg 0.58m", fieldOfView: "33deg"}
+        camera: {target: "0.08m 0.775m 0.11m", orbit: "-20deg 83deg 0.84m", fieldOfView: "33deg"}
       }
     }
   },

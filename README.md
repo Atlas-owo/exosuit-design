@@ -25,12 +25,30 @@ https://atlas-owo.github.io/exosuit-design/
 
 All website assets use relative paths so the model viewer works under the repository's URL path.
 
-## Models and editing
+## Current models
 
-The semi-open design uses `dist/assets/models/BLUE_v1-web.glb`: an 18 MB version of BLUE v1 with 366,146 triangles and the original 4K colour map. Open and embedded designs retain their schematic models. The previous A placeholder is retained in `assets/models/A.glb`.
+The open B design uses `dist/assets/models/GREEN_v3-web.glb` and the semi-open A design uses `dist/assets/models/BLUE_v3-web.glb`. They are exported from the matching v3 Blender files in `dist/assets/`. D uses its schematic model.
 
-Only web assets are included in this repository. Original Blender files, the full-resolution source GLB, generated builds, and local conversion tools are ignored and excluded from the publication build.
+| Design | Web model | Triangles | File size |
+| --- | --- | ---: | ---: |
+| Open B | GREEN v3 | 376,280 | 18,491,108 bytes |
+| Semi-open A | BLUE v3 | 474,002 | 22,520,364 bytes |
 
-`dist/designs.js` contains model paths, descriptions, camera targets, zoom limits, hotspot coordinates, and reference images. BLUE v1 uses its own overview and mobile framing. Its web model retains metre scale, with its bottom at y = 0 and its horizontal centre at x = z = 0.
+The v3 models retain their original 4K colour maps; normal and metallic/roughness maps use 2K JPEG. Mesh simplification targets a ratio of 0.05 with a relative error limit of 0.0005, preserving more triangles when topology or the error limit requires it. No external geometry decoder is needed.
 
-Google model-viewer and DM Sans are bundled locally, with their licenses in `dist/vendor/` and `dist/assets/`.
+Both exports retain metre scale, face +Z, have their bottom at y = 0, and are centred horizontally at x = z = 0. Approximate bounds:
+
+- GREEN v3: x = ±0.321 m, y = 0–0.981 m, z = ±0.142 m.
+- BLUE v3: x = ±0.324 m, y = 0–0.981 m, z = ±0.137 m.
+
+`dist/designs.js` defines model paths, per-design camera targets and orbits, mobile framing, zoom limits, hotspot coordinates and normals, descriptions, and references. Front, back, and side presets inherit the selected design's overview framing.
+
+Original Blender/GLB files, the authoring material pack, and local conversion tools remain local. The publication build includes only the three active models; previous web models and schematic backups remain in the source assets. Conversion scripts and reports are in the ignored `output/model-tools/` directory.
+
+The reference images show the earlier design concepts; the interactive v3 models show the current supplied geometry.
+
+## Components
+
+- Google model-viewer 4.1.0 is included locally in `dist/vendor/`.
+- DM Sans is included locally in `dist/assets/`.
+- The site runs with local assets and browser JavaScript.
