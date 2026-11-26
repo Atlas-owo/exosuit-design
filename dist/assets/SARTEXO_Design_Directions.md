@@ -1,92 +1,126 @@
-# SARTEXO Soft Exosuit Design Directions
+# Wearable Exosuit Visual Design
 
-Design development draft · 25 November 2026 · Based on Batch 19
+Design study · November 2026
 
-The three concepts explore a progression from **open to semi-open to embedded integration**, defined by how the protected artificial-muscle assembly connects to its garment carrier. Design B uses individually mounted modules on an open harness. Design A mounts a distinct external module on a vest. Design D incorporates the working region into the back garment panel. Across the family, concealed textile actuation connects the shoulder and back carrier to bilateral thigh anchors through lower output fittings and passive transmission bands.
+Content adapted from the supplied 46-page presentation, `wearable.pdf`. Design names follow the confirmed website naming; source material is matched to the corresponding model by color and construction.
 
-The latest designs use a long back assembly, with a flexible working span and local fan and connection hardware. Its visible cover provides a packaging envelope. Effective active length, contraction travel and internal dimensions require confirmation against the working components. The application scenarios below are proposals based on the integration approach and intended work routines. Their fit and practical benefits need evaluation in those tasks. [Current design batch](output/imagegen/batch_19_A_contour_D_thickness_2026-11-24/README.md) · [Long back reference and span review](generation_resources/09_sartexo_mechanism_correction/span_reassessment_2026-11-24.md)
+## Design objectives
 
-| Category | Design | Module and garment relationship | Main design priority |
-| --- | --- | --- | --- |
-| Open | B | Two individually bounded modules attached to an adjustable harness | Accessible connections and independent fitting |
-| Semi-open | A | A contoured external module mounted on a shared vest carrier | Coordinated fit with a distinct module interface |
-| Embedded | D | The working region contained within the layered back garment panel | Continuous garment construction and integrated anchoring |
+Develop wearable concepts around a concealed textile-actuation system for lifting and bending assistance. The design study addresses three connected questions:
 
-## Shared design principles
+- How should the shoulder, back, waist and thigh interfaces be organized?
+- How can fitting controls, garment entry and battery access remain easy to identify?
+- How closely should the assistance assembly be integrated with workwear?
 
-- **Keep the force path understandable.** Show the upper attachment, covered working span, lower output, waist guidance and thigh anchors as a connected assembly. Use distinct materials and joints to identify each component's role.
-- **Allow the textile assembly to change length.** Concentrate rigid hardware at local fan mounts and terminals. Provide flexible edging, gathering allowance and space for the lower terminal to move.
-- **Make operation accessible.** Place the external battery on the wearer's left chest and keep its controls, indicators, connector and mounting accessible. Give the entry closure, waist fit and thigh fit their own identifiable adjustments.
-- **Make the construction credible.** Show thickness, sewn transitions and reinforcement where fabric meets hardware. Match the ventilation route to each covered working region and retain a clear distinction between actuator cooling and ordinary garment mesh.
+The drawings, models and reference analogies describe design intent. They do not establish engineering performance. Active length, working travel, cooling, component access and fit remain subjects for development.
 
-## Open integration through independent modules
+## From exploration to selection
 
-**Design B**
+Sixteen early concepts comprised eight structural arrangements and eight occupational workwear studies. Three retained structures develop an open shoulder harness, a front-opening vest with thigh interfaces, and a side-fastening top paired with support shorts. The occupational references inform equipment placement, closures and garment access.
 
-![Design B showing two independent textile modules on an open harness](output/imagegen/batch_19_A_contour_D_thickness_2026-11-24/color/B_front_rear.png)
+## Modular Harness Exosuit
 
-*Current color concept.* [Gray construction view](output/imagegen/batch_19_A_contour_D_thickness_2026-11-24/gray/B_front_rear.png) · [Left-side view](output/imagegen/batch_19_A_contour_D_thickness_2026-11-24/color/B_left_side.png) · [Extended and shortened module illustration](output/imagegen/batch_19_A_contour_D_thickness_2026-11-24/detail/B_long_relaxed_contracted.png)
+The green model combines the **Harness and High Supports** structural concept with the **Equipment Harness** logistics study. Open shoulder straps and a separate waist belt organize the upper fit; narrow thigh cuffs replace earlier high hip wraps. Rear actuation and passive transfer straps distinguish the working modules from the body-contact interfaces.
 
-**Design direction.** Treat the assistance assembly as identifiable equipment attached to a harness. Two elongated modules hang from the shoulder yoke, each with its own upper attachment, flexible textile body and lower fan and output fitting. Passive webbing continues to separately fitted high thigh cuffs. The chest, flanks and central pelvis have limited fabric coverage.
+### Body interfaces and construction
 
-**Design principles.** Keep module boundaries and upper and lower connections visible so their assembly and adjustment are easy to understand. Concentrate padding at the shoulders, waist and cuffs. Give the flexible middle of each module room to gather while maintaining its alignment with the lower strap. This approach makes module-level inspection and replacement a development priority.
+- A reinforced shoulder yoke connects to two distinct rear module mounts.
+- Continuous textile covers protect the flexible working spans; local hardware remains separate from the changing-length regions.
+- A separate belt provides waist adjustment without combining it with the thigh closures.
+- Each padded cuff has an identifiable opening, circumference adjustment and reinforced transfer-strap attachment.
+- The chest-device mount leaves the waist belt available for fitting.
 
-**Reference analysis.** The open front, shoulder straps and broad waist contact develop the harness arrangements in Decks 01 and 03. The latest version gives each long rear unit a complete attachment boundary and a local lower fan. Its equipment-like appearance comes from the separate units, exposed webbing and identifiable terminals. [SARTEXO Deck 01](reference/01_F_SARTEXO.pptx) · [SARTEXO Deck 03](reference/03_F_SARTEXO.pptx) · [Long module design rationale](output/imagegen/batch_18_batch14_long_back_revision_2026-11-24/rationales.md)
+### Materials, color and finish
 
-**Proposed applications**
+| Color | Reference |
+| --- | --- |
+| Olive green | #737A42 |
+| Pale sage | #B0B28C |
+| Graphite | #414142 |
+| Charcoal | #282829 |
+| Signal yellow | #E5B83D |
 
-- **Warehouse picking and retail replenishment.** A worker wears the harness over an existing uniform for repeated bouts of shelf stocking or handling low bins. Accessible torso and thigh adjustments suit a device fitted for a particular work session.
-- **Event installation and equipment handling.** Crews alternate between carrying cases, bending and other duties. A separately fitted harness supports the concept of assistance equipment used during selected handling tasks.
-- **Horticulture and nursery operations.** Potting, sorting trays and moving containers offer scenarios for studying the open carrier during frequent walking and bending.
+Woven covers, open mesh, webbing and molded housings form the material direction. Bound edges, diamond quilting, Box-X stitching and matte hardware clarify construction. Landscape tones, leaf structure and spacer knit inform the visual references.
 
-**Materials and keywords.** Olive woven module covers, sage-gray contact padding, graphite webbing and hardware, and small amber operating cues. Keywords include openness, module independence, adjustable harness, localized contact and accessible connections.
+**Development priorities:** upper and lower attachment boundaries, flexible working clearance, independent cuff retention, local fan packaging and lower output connections.
 
-**Development focus.** Check cuff migration, movement of the modules relative to the harness and the balance of the two transfer paths. Resolve how each lower fan serves its long textile working region.
+**Source:** PDF pages 24 and 28–32.
 
-## Semi-open integration through a shared vest carrier
+## Vest-Mounted Exosuit
 
-**Design A**
+The blue model combines the **Continuous Carrier** structural concept with the **Care and Service Vest** workwear study. A front-opening vest overlaps a wide adjustable waist flap. Lateral strips extend along the outer hips to separately buckled thigh cuffs.
 
-![Design A showing a contoured external module mounted on a zip-front vest](output/imagegen/batch_19_A_contour_D_thickness_2026-11-24/color/A_front_rear.png)
+### Body interfaces and construction
 
-*Current color concept.* [Gray construction view](output/imagegen/batch_19_A_contour_D_thickness_2026-11-24/gray/A_front_rear.png) · [Left-side view](output/imagegen/batch_19_A_contour_D_thickness_2026-11-24/color/A_left_side.png)
+- The shared vest positions the rear working region and front battery mount.
+- The familiar front opening separates dressing from torso and thigh adjustment.
+- A central cooling fan and lower airflow interface occupy the rear working region.
+- Lateral connecting strips organize the route to the thigh cuffs while leaving the seat open.
+- The chest controls and battery retention remain distinct from the waist closure.
 
-**Design direction.** Combine a continuous vest carrier with a separately identifiable external working module. The zip-front vest and broad waist overlap establish the upper fit, while narrow outer-thigh panels terminate in lower thigh bands. The back module has a broader shoulder-blade region, a gently narrowed waist and rounded lower corners. Its bound edge, upper mounts and lower output fittings make its attachment to the vest visible.
+### Materials, color and finish
 
-**Design principles.** Use the garment as a common base for positioning and support while allowing movement between the flexible module and its backing. Follow the back contour with a soft working span and controlled clearance at the waist. Keep the lower mesh outlet separate from the two output fittings so cooling and transmission can be traced individually.
+| Color | Reference |
+| --- | --- |
+| Deep blue | #005895 |
+| Mesh white | #E4E5E7 |
+| Graphite | #44474B |
+| Charcoal | #26282B |
+| Aqua | #58A9C5 |
 
-**Reference analysis.** Deck 02 provides the zip-front carrier, waist overlap and central fan arrangement. Batch 19 develops the rear assembly into a curved module with a distinct mounting layer. Repeating blue fabric across the carrier, module cover and lateral thigh panels gives the product a coordinated appearance. [SARTEXO Deck 02](reference/02_F_SARTEXO%281%29.pptx) · [Batch 19 contour rationale](output/imagegen/batch_19_A_contour_D_thickness_2026-11-24/rationales.md)
+Woven shell, open mesh, webbing and molded housings form the material direction. Bound edges, topstitching, reinforced cross details and an aqua zipper pull define the finish. Water tones, care settings, open knit, easy-grip details and soft layers inform the visual references.
 
-**Proposed applications**
+### Reference dimensions
 
-- **Manufacturing and assembly.** Repeated loading of low fixtures, handling component bins and moving parts offer tasks for studying a vest fitted at the beginning of a work period. The shared carrier organizes the assistance assembly as one wearable product.
-- **Facility maintenance and technical service.** Technicians repeatedly reach for tools and parts while moving between work locations. A vest-based system provides a familiar equipment format, with a defined interface around the rear module for inspection.
-- **Workshop and installation work.** Bench preparation and occasional material handling provide a setting for evaluating torso fit together with the long lateral thigh interfaces.
+Drawing reference: male figure, 180 cm. All component dimensions below are in millimetres and are reference envelopes for further sizing and production review.
 
-**Materials and keywords.** Work-blue woven panels, steel-gray mesh, graphite straps and hardware, and small teal operating cues. Keywords include semi-open integration, contoured module, shared carrier, flexible attachment and technical vest.
+| Component | Drawing value |
+| --- | --- |
+| Battery module | 80 × 160 |
+| Cooling fan | Ø 100 |
+| Waist flap | 205 × 155 |
+| Air intake | 175 × 35 |
 
-**Development focus.** Check movement between the module and vest during bending, including lower-terminal travel and the position of the waist overlap. Confirm that the narrowed module retains adequate space for the working components and airflow.
+**Development priorities:** coordination of the vest opening and waist flap, movement clearance behind the working region, airflow and transmission packaging, and review of the component envelopes.
 
-## Embedded integration within the garment
+**Source:** PDF pages 25 and 34–38. The dimension drawing is on page 38.
 
-**Design D**
+## Garment-Integrated Exosuit
 
-![Design D showing a layered back working region integrated into a tabard and support shorts](output/imagegen/batch_19_A_contour_D_thickness_2026-11-24/color/D_front_rear.png)
+The orange model develops the **Tabard and Support Shorts** structure through the **Side Opening Tabard** workwear reference. A side-fastening top pairs with wrapover support shorts. The garment layers contain the back working region, and waist guides organize its connection to the lower interfaces.
 
-*Current color concept.* [Gray construction view](output/imagegen/batch_19_A_contour_D_thickness_2026-11-24/gray/D_front_rear.png) · [Left-side view showing the working-region thickness](output/imagegen/batch_19_A_contour_D_thickness_2026-11-24/color/D_left_side.png)
+### Body interfaces and construction
 
-**Design direction.** Incorporate the assistance assembly into the construction of the work garment. A side-opening tabard contains the long back working region within a layered textile panel. Shallow sidewalls, a rounded lower edge and sewn transitions express the space reserved inside it. Passive output bands pass through waist guides and continue to reinforced thigh hems in the support shorts. The upper fan and lower mesh outlet form local interfaces within the continuous back panel.
+- Shoulder mesh and bound armholes define the upper contact and ventilation zones.
+- The flexible working region is contained in the layered back garment, with local fan hardware.
+- Waist transfer guides organize the connection between the top and shorts.
+- The lower garment brings waist, seat and thigh contact areas together, with adjustable bands and defined thigh interfaces.
+- Side closures preserve a continuous front panel and accessible chest equipment.
 
-**Design principles.** Let the garment panels provide containment, positioning and routes to the lower anchors. Preserve soft volume along the working span and allow internal contraction through suitable layer movement. Develop service access, electrical disconnection and cleaning arrangements as part of the garment construction. The side closures provide entry and fit adjustment around the continuous front panel.
+### Materials, color and finish
 
-**Reference analysis.** The retained service tabard study contributes broad front and rear panels, open flanks and separate waist fitting. The latest design integrates the long working region through continuous cloth and seams. Batch 19 adds visible depth, particularly in profile, to communicate room for the internal assembly. The support shorts extend this garment construction to the thigh anchors. [Service tabard study](output/imagegen/batch_05_functional_refinement/rationales.md) · [Batch 19 thickness rationale](output/imagegen/batch_19_A_contour_D_thickness_2026-11-24/rationales.md)
+| Color | Reference |
+| --- | --- |
+| Sport orange | #E76B3D |
+| Mesh grey | #899098 |
+| Silver trim | #C2C3C2 |
+| Graphite | #414347 |
+| Charcoal | #27282A |
 
-**Proposed applications**
+Woven shell, shoulder mesh, webbing and molded local housings form the material direction. Bound armholes and hems, topstitching and silver trim define the garment edges. Running apparel, track markings, citrus colors, engineered mesh and reflective detailing inform the visual references.
 
-- **Commercial laundry and housekeeping.** Linen handling, loading laundry equipment and replenishing supplies provide repeated bending tasks. A dedicated work garment could organize assistance as part of a worker's regular clothing and cleaning routine.
-- **Production and packaging stations.** A consistent set of tasks and an individually fitted garment offer a setting for developing integrated support throughout a work period.
-- **Hospital support logistics.** Linen distribution, supply restocking and equipment handling could motivate a uniform-based version, with access and cleaning requirements developed alongside the embedded assembly.
+**Development priorities:** internal layer structure, textile movement allowance, alignment of the top and shorts during bending and sitting, independent waist and thigh adjustment, and component access for servicing and cleaning.
 
-**Materials and keywords.** Muted burnt-orange twill on the tabard, dense graphite fabric on the support shorts, cool-gray mesh and restrained pale-stone operating cues. Keywords include embedded actuation, continuous garment construction, layered textiles, integrated thigh anchoring and occupational workwear.
+Human + Exosuit shows the supplied Orange_H model on a human mannequin. Exosuit Only shows the standalone equipment model; the document illustrations communicate the intended garment and material direction.
 
-**Development focus.** Establish the internal layer structure, contraction allowance and component access. Evaluate the thicker back panel during bending and sitting, and check how the tabard, waist guides and shorts align during movement.
+**Source:** PDF pages 26 and 40–43.
+
+## Shared assistance path
+
+Shoulder support → covered textile working span → lower output and passive transfer straps → thigh interfaces.
+
+This sequence communicates the proposed arrangement of working components and body interfaces. The detailed actuation sizing and mechanical behavior require further development.
+
+## Reference approach
+
+The presentation examines textile assistance harnesses, industrial back-support packaging, garment-integrated systems and occupational workwear. Product references include SARTEXO, Auxivo LiftSuit, HeroWear Apex 2, INNOPHYS Muscle Suit Every, SUITX, German Bionic and Seismic. These references inform interface organization and packaging rather than establishing equivalent performance.

@@ -6,7 +6,7 @@ import {designs} from "../dist/designs.js";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const source = path.join(root, "dist");
 const output = path.join(root, "build");
-const publishedModels = new Set(Object.values(designs).map(design => design.model));
+const publishedModels = new Set(Object.values(designs).flatMap(design => [design.model, design.equipmentModel].filter(Boolean)));
 
 await rm(output, {recursive: true, force: true});
 await mkdir(output, {recursive: true});

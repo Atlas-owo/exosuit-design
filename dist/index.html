@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#fafafa">
-  <meta name="description" content="Compare Modular Harness Exosuit, Vest-Mounted Exosuit and Garment-Integrated Exosuit through interactive 3D models and guided detail views.">
+  <meta name="description" content="Explore three wearable exosuit concepts through interactive 3D models, component views, design development, materials and finishes, and reference dimensions.">
   <title>Wearable Exosuit Visual Design</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/dm-sans.woff2" as="font" type="font/woff2" crossorigin>
@@ -16,40 +16,45 @@
   <a class="skip-link" href="#explorer">Skip to the model explorer</a>
   <header class="site-header">
     <a class="wordmark" href="./" aria-label="SARTEXO home">SARTEXO<span></span></a>
-    <button class="text-button about-trigger" type="button">About the study <span class="information-icon" aria-hidden="true">i</span></button>
+    <button class="text-button about-trigger" type="button">About <span class="information-icon" aria-hidden="true">i</span></button>
   </header>
   <main class="page-shell" id="explorer">
     <section class="intro" aria-labelledby="page-title">
       <h1 id="page-title">Wearable Exosuit Visual Design</h1>
+      <p class="intro-description">Three approaches to wearable assistance, developed around concealed textile actuation for lifting and bending. Explore body interfaces, fitting access and garment integration.</p>
     </section>
     <nav class="design-tabs" role="tablist" aria-label="Integration approach">
       <button id="tab-B" class="design-tab is-active" role="tab" type="button" data-design="B" aria-selected="true" aria-controls="design-panel">
-        <span><strong>Modular Harness Exosuit</strong><small>Independent modules</small></span>
+        <span><span class="design-number">Design 01</span><strong>Modular Harness Exosuit</strong><small>Independent modules</small></span>
       </button>
       <button id="tab-A" class="design-tab" role="tab" type="button" data-design="A" aria-selected="false" aria-controls="design-panel" tabindex="-1">
-        <span><strong>Vest-Mounted Exosuit</strong><small>A shared vest carrier</small></span>
+        <span><span class="design-number">Design 02</span><strong>Vest-Mounted Exosuit</strong><small>A shared vest carrier</small></span>
       </button>
       <button id="tab-D" class="design-tab" role="tab" type="button" data-design="D" aria-selected="false" aria-controls="design-panel" tabindex="-1">
-        <span><strong>Garment-Integrated Exosuit</strong><small>Integrated into the garment</small></span>
+        <span><span class="design-number">Design 03</span><strong>Garment-Integrated Exosuit</strong><small>Integrated into the garment</small></span>
       </button>
     </nav>
+    <div class="model-selection"><span class="model-selection-label" id="model-version-label">Model version</span><div class="model-version-options" role="group" aria-labelledby="model-version-label">
+      <button class="model-version-button is-active" type="button" data-model-variant="with-body" aria-pressed="true">Human + Exosuit</button>
+      <button class="model-version-button" type="button" data-model-variant="equipment-only" aria-pressed="false">Exosuit Only</button>
+    </div></div>
     <div class="workspace">
       <section class="viewer-panel" aria-label="Interactive 3D model">
         <div class="viewer-topbar">
-          <span class="placeholder-label"><span aria-hidden="true" class="cube-icon"></span><span id="model-label">GREEN v3 · 3D design model</span></span>
+          <span class="placeholder-label"><span aria-hidden="true" class="cube-icon"></span><span id="model-label">Design 01 · Human + Exosuit</span></span>
           <button class="icon-button" id="fullscreen-button" type="button" aria-label="Enter full screen" title="Full screen">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 4H4v4m12-4h4v4M4 16v4h4m12-4v4h-4"/></svg>
           </button>
         </div>
-        <model-viewer id="model-viewer" src="assets/models/GREEN_v3-web.glb"
-          alt="Textured GREEN v3 open-harness exosuit with independent rear modules and thigh cuffs."
-          camera-controls disable-pan disable-zoom interaction-prompt="none" touch-action="pan-y"
+        <model-viewer id="model-viewer" src="assets/models/GREEN_v4-web.glb"
+          alt="Green modular harness exosuit worn on a neutral human mannequin, with independent rear modules and thigh cuffs."
+          camera-controls disable-pan interaction-prompt="none" touch-action="pan-y"
           camera-orbit="45deg 83deg 2.65m" camera-target="0m 0.49m 0m" field-of-view="33deg"
           min-camera-orbit="auto 20deg 1.325m" max-camera-orbit="auto 155deg 2.65m"
           min-field-of-view="33deg" max-field-of-view="33deg"
           environment-image="assets/lighting/B-studio.hdr"
           shadow-intensity="0.11" shadow-softness="1" exposure="0.95" tone-mapping="neutral"
-          interpolation-decay="90" loading="eager">
+          interpolation-decay="180" loading="eager">
           <button class="hotspot" slot="hotspot-module" type="button" data-topic="module" data-position="0.07m 0.76m -0.144m" data-normal="0m 0m -1m" data-visibility-attribute="visible" aria-label="Explore the muscle module"><span aria-hidden="true">+</span><span class="hotspot-label">Muscle module</span></button>
           <button class="hotspot" slot="hotspot-cooling" type="button" data-topic="cooling" data-position="0.065m 0.59m -0.144m" data-normal="0m 0m -1m" data-visibility-attribute="visible" aria-label="Explore cooling and output"><span aria-hidden="true">+</span><span class="hotspot-label">Cooling &amp; output</span></button>
           <button class="hotspot" slot="hotspot-anchors" type="button" data-topic="anchors" data-position="0.17m 0.31m -0.079m" data-normal="0m 0m -1m" data-visibility-attribute="visible" aria-label="Explore the thigh anchors"><span aria-hidden="true">+</span><span class="hotspot-label">Thigh anchors</span></button>
@@ -58,20 +63,19 @@
         <div class="loading-overlay" id="loading-overlay" role="status"><span class="spinner" aria-hidden="true"></span><span>Preparing the 3D model</span><span class="progress-track"><span id="loading-bar"></span></span></div>
         <div class="load-error" id="load-error" role="alert" hidden><strong>The 3D model could not load.</strong><p>You can still explore its design reference.</p><button id="retry-button" class="primary-button" type="button">Try again</button></div>
         <div class="viewer-bottom">
-          <p class="interaction-hint"><span class="desktop-hint">Drag to rotate<span data-zoom-hint hidden><span>·</span> Scroll to zoom</span></span><span class="touch-hint">Drag to rotate<span data-zoom-hint hidden><span>·</span> Pinch to zoom</span></span></p>
+          <p class="interaction-hint"><span class="desktop-hint">Drag to rotate<span data-zoom-hint><span>·</span> Scroll to zoom</span></span><span class="touch-hint">Drag to rotate<span data-zoom-hint><span>·</span> Pinch to zoom</span></span></p>
         </div>
       </section>
       <aside class="detail-panel" id="design-panel" role="tabpanel" aria-labelledby="tab-B" tabindex="0">
-        <p class="detail-eyebrow" id="detail-eyebrow">MODULAR HARNESS EXOSUIT</p>
+        <p class="detail-eyebrow" id="detail-eyebrow">Design 01 · Modular Harness Exosuit</p>
         <h2 id="detail-title">Independent modules,<br>an open harness.</h2>
-        <p class="detail-description" id="detail-description">Two protected textile modules connect individually to a shoulder harness and high thigh cuffs. Open chest and side areas keep the carrier visually light.</p>
+        <p class="detail-description" id="detail-description">An open shoulder harness and a separate waist belt carry two protected rear working modules. Passive transfer straps continue to independently adjustable thigh cuffs, keeping the torso centre open.</p>
         <div class="principle-block"><h3 id="principle-title">Design principle</h3><p id="principle-description">Keep each module, attachment, and fit adjustment identifiable.</p></div>
-        <ul id="keyword-list" class="keyword-list" aria-label="Design keywords"><li>Modular</li><li>Adjustable</li><li>Open coverage</li></ul>
         <div class="reference-block">
-          <button id="reference-preview" class="reference-preview" type="button" aria-label="Open design reference images"><img id="reference-thumbnail" src="assets/references/B-v3-reference.jpg" alt="GREEN v3 front and back model reference" width="1600" height="1100"><span class="reference-image-label">Model reference</span><span class="reference-expand" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M8 4H4v4m12-4h4v4M4 16v4h4m12-4v4h-4"/></svg></span></button>
+          <button id="reference-preview" class="reference-preview" type="button" aria-label="Open design reference images"><img id="reference-thumbnail" src="assets/references/design-01-reference.png" alt="Modular Harness Exosuit, front and rear three-quarter design views" width="1550" height="1166"><span class="reference-expand" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M8 4H4v4m12-4h4v4M4 16v4h4m12-4v4h-4"/></svg></span></button>
           <button id="reference-open" class="reference-caption" type="button"><span>View the design reference</span></button>
         </div>
-        <div class="context-block"><h3 id="context-title">Proposed applications</h3><p id="context-description">Warehouse picking, event installation, and horticulture.</p></div>
+        <div class="context-block"><h3 id="context-title">Workwear reference</h3><p id="context-description">Logistics equipment harnesses inform the chest-device mount, accessible waist belt and independently adjustable lower interfaces.</p></div>
       </aside>
     </div>
     <nav class="detail-navigation" aria-label="Model views and details"><div class="detail-buttons">
@@ -85,13 +89,53 @@
       <button class="detail-button" type="button" data-topic="battery" aria-pressed="false">Battery mount</button>
       <button id="reset-button" class="icon-button reset-button" type="button" aria-label="Reset model view" title="Reset view"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1.6 7.1M4 4v6h6"/></svg></button>
     </div></nav>
+    <section class="study-section" aria-labelledby="study-title">
+      <div class="study-heading"><div><p class="eyebrow">Design development</p><h2 id="study-title">From concept to construction</h2></div><span id="study-design-name" class="study-design-name">Modular Harness Exosuit</span></div>
+      <p id="study-summary" class="study-summary"></p>
+      <ol id="development-steps" class="development-steps" aria-label="Concept development"></ol>
+      <div class="study-disclosures">
+        <details class="study-disclosure" open>
+          <summary>Materials, colors &amp; finishes</summary>
+          <div class="study-disclosure-body">
+            <ul id="study-palette" class="study-palette" aria-label="Design color palette"></ul>
+            <div class="cmf-layout">
+              <div class="cmf-construction">
+                <section class="cmf-group" aria-labelledby="cmf-material-title"><h3 id="cmf-material-title">Material</h3><ul id="study-material-images" class="cmf-gallery" aria-label="Material references"></ul></section>
+                <section class="cmf-group" aria-labelledby="cmf-finish-title"><h3 id="cmf-finish-title">Finish</h3><ul id="study-finish-images" class="cmf-gallery" aria-label="Finish references"></ul></section>
+              </div>
+              <section class="cmf-group cmf-mood" aria-labelledby="cmf-mood-title"><h3 id="cmf-mood-title">Mood board</h3><ul id="study-mood-images" class="cmf-gallery" aria-label="Mood board references"></ul></section>
+            </div>
+          </div>
+        </details>
+        <details class="study-disclosure">
+          <summary>Body interfaces &amp; assistance path</summary>
+          <div class="study-disclosure-body">
+            <p class="study-body-copy">The design study organizes the connection between the upper carrier, protected working region and lower body interfaces.</p>
+            <ol class="assistance-path" aria-label="Assistance path"><li>Shoulder support</li><li>Covered working span</li><li>Lower output &amp; transfer straps</li><li>Thigh interfaces</li></ol>
+            <dl id="study-interfaces" class="study-interface-list"></dl>
+          </div>
+        </details>
+        <details id="study-dimensions" class="study-disclosure" hidden>
+          <summary>Reference dimensions</summary>
+          <div class="study-disclosure-body dimensions-layout">
+            <div><table class="dimension-table"><caption>Component envelopes · dimensions in mm</caption><tbody id="study-dimension-rows"></tbody></table><p class="study-body-copy">Drawing reference: male figure, 180 cm. These concept dimensions support further sizing and production review.</p></div>
+            <figure class="study-figure"><a href="assets/study/A-dimensions.jpg" target="_blank" rel="noopener"><img src="assets/study/A-dimensions.jpg" alt="Blue vest front and rear reference drawing with component dimensions" loading="lazy" width="1600" height="804"></a><figcaption>Technical reference drawing · PDF page 38 · Open image for a closer view.</figcaption></figure>
+          </div>
+        </details>
+        <details class="study-disclosure">
+          <summary>Development priorities</summary>
+          <div class="study-disclosure-body"><ul id="study-priorities" class="study-priorities"></ul><p class="study-body-copy">The drawings and models communicate design intent. Actuator sizing, working travel, cooling and fit remain topics for further development.</p></div>
+        </details>
+      </div>
+      <p id="study-source" class="study-source"></p>
+    </section>
     <details class="lighting-tool">
       <summary>Lighting studio <span>Temporary tool</span></summary>
       <div class="lighting-body">
         <p class="lighting-description">Adjust the soft studio light. Each design remembers its own settings in this browser. Copy the settings when you are ready to render.</p>
         <label class="zoom-control" for="zoom-toggle">
-          <span><strong>Enable zoom</strong><small id="zoom-description">Off by default · Allow scroll or pinch to zoom from 1× to 2×.</small></span>
-          <input id="zoom-toggle" type="checkbox" role="switch" aria-describedby="zoom-description" autocomplete="off">
+          <span><strong>Enable zoom</strong><small id="zoom-description">On by default · Allow scroll or pinch to zoom from 1× to 2×.</small></span>
+          <input id="zoom-toggle" type="checkbox" role="switch" aria-describedby="zoom-description" autocomplete="off" checked>
         </label>
         <div class="lighting-controls">
           <label class="lighting-control" for="light-azimuth"><span>Light direction <output for="light-azimuth" data-light-output="azimuth"></output></span><input id="light-azimuth" data-light="azimuth" type="range" min="-180" max="180" step="1" value="-35"><small>0° front · ±180° back · +90° right</small></label>
@@ -118,13 +162,16 @@
   <dialog class="reference-dialog" id="reference-dialog" aria-labelledby="reference-dialog-title">
     <div class="dialog-header"><div><p class="eyebrow" id="reference-dialog-kicker">DESIGN REFERENCE</p><h2 id="reference-dialog-title">Modular Harness Exosuit</h2></div><button class="icon-button close-dialog" type="button" aria-label="Close reference images"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
     <div class="reference-view-switch" role="group" aria-label="Reference view"><button class="reference-view-button is-active" data-reference-view="front-rear" type="button" aria-pressed="true">Front &amp; back</button><button class="reference-view-button" data-reference-view="side" type="button" aria-pressed="false">Left profile</button></div>
-    <div class="reference-full-frame"><img id="reference-full-image" src="assets/references/B-v3-reference.jpg" alt="GREEN v3 front and back model render"></div><p class="reference-footnote">Front, back, and left-side views rendered from GREEN v3 with your selected soft studio lighting.</p>
+    <div class="reference-full-frame"><img id="reference-full-image" src="assets/references/design-01-reference.png" alt="Modular Harness Exosuit, front and rear three-quarter design views"></div><p class="reference-footnote">Front and rear three-quarter design views supplied by the designer.</p>
   </dialog>
   <dialog class="about-dialog" id="about-dialog" aria-labelledby="about-title">
-    <div class="dialog-header"><div><p class="eyebrow">ABOUT THE STUDY</p><h2 id="about-title">Three levels of integration.</h2></div><button class="icon-button close-dialog" type="button" aria-label="Close study information"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
-    <p>This study explores how a protected textile assistance assembly connects to its carrier and to the wearer.</p>
+    <div class="dialog-header"><div><p class="eyebrow">ABOUT</p><h2 id="about-title">Three ways to wear an exosuit.</h2></div><button class="icon-button close-dialog" type="button" aria-label="Close study information"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <p>Wearable Exosuit Visual Design is a November 2026 design study of wearable concepts around a concealed textile-actuation system for lifting and bending assistance.</p>
+    <h3>Design objectives</h3><ul class="about-objectives"><li>Organize the shoulder, back, waist and thigh interfaces.</li><li>Make fitting controls and battery access easy to identify.</li><li>Explore different levels of integration with workwear.</li></ul>
+    <h3>From exploration to selection</h3><p>Sixteen early concepts explored eight structural arrangements and eight occupational workwear directions. Three retained structures develop an open harness, a vest with thigh interfaces, and a top paired with support shorts.</p>
     <dl class="about-designs"><div><dt>Modular Harness Exosuit</dt><dd>Individually bounded modules attach to an open, adjustable harness.</dd></div><div><dt>Vest-Mounted Exosuit</dt><dd>A contoured external module mounts on a shared vest carrier.</dd></div><div><dt>Garment-Integrated Exosuit</dt><dd>The working region sits within the layered back garment panel.</dd></div></dl>
-    <h3>About the interactive models</h3><p>Modular Harness Exosuit uses the textured GREEN v3 model, and Vest-Mounted Exosuit uses BLUE v3. Garment-Integrated Exosuit uses a purpose-built schematic placeholder. The reference images communicate the exterior design intent.</p><p>Active length, contraction travel, cooling, and fit remain under development. Application examples describe proposed uses for evaluation.</p>
+    <h3>Reference approach</h3><p>The reference analysis brings together textile assistance harnesses, industrial back-support packaging, and garment-integrated systems. Workwear studies inform device placement, garment openings, closures and the organization of body-contact regions.</p>
+    <h3>About the interactive models</h3><p>Each design offers a Human + Exosuit view and a separate Exosuit Only view. The mannequin views show garment placement and body relationships; the standalone views allow inspection of the equipment with independent framing and component hotspots. Models, concept illustrations and reference dimensions support visual design review.</p><p>Active length, contraction travel, cooling and fit remain under development. Source references and garment analogies inform the design without establishing engineering performance.</p>
     <a class="notes-link" href="assets/SARTEXO_Design_Directions.md" download>Download the design notes</a>
   </dialog>
   <div class="sr-only" id="announcement" role="status" aria-live="polite"></div>

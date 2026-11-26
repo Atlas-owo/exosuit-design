@@ -1,12 +1,11 @@
 // Per-design model, camera and hotspot settings.
 // Camera targets and hotspot positions use metres in each GLB's coordinate system.
+import {orangeHumanView} from "./orange-human-view.js";
+import {greenHumanView} from "./green-human-view.js";
+
 const neutralTheme = {accent: "#646464", dark: "#373737", soft: "#f0f0f0"};
 
-export const overviewCamera = {
-  target: "0m 1.06m 0m",
-  orbit: "45deg 83deg 3.65m",
-  fieldOfView: "33deg"
-};
+export const overviewCamera = orangeHumanView.cameras.overview;
 
 const batteryTopic = {
   title: ["Power within reach."],
@@ -21,50 +20,41 @@ const batteryTopic = {
 export const designs = {
   B: {
     code: "B",
+    number: "Design 01",
     label: "Modular Harness Exosuit",
-    model: "assets/models/GREEN_v3-web.glb",
-    modelLabel: "GREEN v3 · 3D design model",
+    model: "assets/models/GREEN_v4-web.glb",
+    equipmentModel: "assets/models/GREEN_K-web.glb",
+    modelLabel: "GREEN v4 · 3D design model",
     viewAngles: {front: "0deg", back: "180deg", side: "90deg"},
-    reference: "assets/references/B-v3-reference.jpg",
+    reference: "assets/references/design-01-reference.png",
+    referenceWidth: 1550,
+    referenceHeight: 1166,
     sideReference: "assets/references/B-v3-side.jpg",
     referenceKind: "model",
-    referenceLabel: "Model reference",
-    referenceNote: "Front, back, and left-side views rendered from GREEN v3 with your selected soft studio lighting.",
-    alt: "Textured GREEN v3 open-harness exosuit with two independent rear textile modules, local fans, adjustable chest straps, and separate thigh cuffs over white work clothing.",
+    referenceLabel: "Design reference",
+    referenceNote: "Front and rear three-quarter design views supplied by the designer.",
+    alt: "Green modular harness exosuit worn on a neutral human mannequin, with two rear textile modules, local fans, an adjustable waist belt and separate thigh cuffs.",
     theme: neutralTheme,
-    hotspots: {
-      module: "0.07m 0.76m -0.144m",
-      cooling: "0.065m 0.59m -0.144m",
-      anchors: "0.17m 0.31m -0.079m",
-      battery: "0.09m 0.8m 0.14m"
-    },
-    hotspotNormals: {
-      module: "0m 0m -1m",
-      cooling: "0m 0m -1m",
-      anchors: "0m 0m -1m",
-      battery: "0m 0m 1m"
-    },
+    hotspots: greenHumanView.hotspots,
+    hotspotNormals: greenHumanView.hotspotNormals,
     topics: {
       overview: {
         title: ["Independent modules,", "an open harness."],
-        description: "Two protected textile modules connect individually to a shoulder harness and high thigh cuffs. Open chest and side areas keep the carrier visually light.",
-        principle: "Keep each module, attachment, and fit adjustment identifiable.",
-        keywords: ["Modular", "Adjustable", "Open coverage"],
-        contextTitle: "Proposed applications",
-        context: "Warehouse picking, event installation, and horticulture.",
-        camera: {
-          target: "0m 0.49m 0m", orbit: "45deg 83deg 2.65m", fieldOfView: "33deg",
-          mobile: {target: "0m 0.445m 0m", orbit: "45deg 83deg 2.95m"}
-        }
+        description: "An open shoulder harness and a separate waist belt carry two protected rear working modules. Passive transfer straps continue to independently adjustable thigh cuffs, keeping the torso centre open.",
+        principle: "Separate upper support, waist fit and thigh closures while keeping the rear assistance path understandable.",
+        keywords: ["Open harness", "Independent fit", "Defined mounts"],
+        contextTitle: "Workwear reference",
+        context: "Logistics equipment harnesses inform the chest-device mount, accessible waist belt and independently adjustable lower interfaces.",
+        camera: greenHumanView.cameras.overview
       },
       module: {
         title: ["Two individually", "mounted modules."],
-        description: "Each long unit has its own upper attachment, a flexible protected textile span, and a lower connection to the passive transfer band.",
-        principle: "Make the module boundary and both connection ends readable while leaving room for the textile span to gather.",
+        description: "The shoulder yoke connects to two distinct rear module mounts through reinforced textile interfaces. Each continuous cover protects a flexible working span, with local hardware at its ends.",
+        principle: "Keep the mounting boundary visible and local hardware separate from the changing-length textile region.",
         keywords: ["Independent mounting", "Flexible span", "Defined terminals"],
         contextTitle: "Detail to evaluate",
         context: "Alignment, movement relative to the harness, and access for inspection or replacement.",
-        camera: {target: "0m 0.74m -0.1m", orbit: "160deg 82deg 1.4m", fieldOfView: "33deg"}
+        camera: greenHumanView.cameras.module
       },
       cooling: {
         title: ["Local fans,", "defined outputs."],
@@ -73,35 +63,41 @@ export const designs = {
         keywords: ["Local cooling", "Output fitting", "Passive transfer"],
         contextTitle: "Detail to evaluate",
         context: "The airflow route through each long textile region and the clearance around the moving lower terminal.",
-        camera: {target: "0m 0.59m -0.11m", orbit: "180deg 85deg 0.9m", fieldOfView: "33deg"}
+        camera: greenHumanView.cameras.cooling
       },
       anchors: {
         title: ["Independent fit", "at each thigh."],
-        description: "Two high cuffs close at the front and connect to the rear transfer bands. Each cuff has its own circumference adjustment.",
-        principle: "Concentrate contact and padding at the anchors, with clear routes from the modules to the legs.",
-        keywords: ["High cuffs", "Separate adjustment", "Open pelvis"],
+        description: "Narrow thigh cuffs replace the earlier high hip wraps. Each cuff has a separate opening and fit adjustment, with reinforced attachments joining the rear transfer straps to the padded contact area.",
+        principle: "Give each thigh an identifiable closure and a direct connection to its transfer path.",
+        keywords: ["Narrow cuffs", "Separate adjustment", "Padded contact"],
         contextTitle: "Detail to evaluate",
         context: "Cuff migration during walking and bending, and the balance between the two transmission routes.",
-        camera: {target: "0m 0.31m -0.025m", orbit: "145deg 83deg 1.4m", fieldOfView: "33deg"}
+        camera: greenHumanView.cameras.anchors
       },
       battery: {
         ...batteryTopic,
-        description: "The external battery sits on the wearer's left shoulder rail, with visible front controls and a retaining strap above the waist belt.",
-        context: "Evaluate docking, cable retention, and release access alongside the harness adjustments.",
-        camera: {target: "0.09m 0.8m 0.11m", orbit: "-20deg 83deg 0.9m", fieldOfView: "33deg"}
+        description: "A defined shoulder-strap mount carries the chest battery, with visible controls and tactile operating details. Its placement leaves the separate waist belt available for fitting.",
+        principle: "Separate equipment access from the waist closure and keep the operating surface easy to identify.",
+        contextTitle: "Access to review",
+        context: "Battery retention, connector access and release should be developed alongside the independent harness adjustments.",
+        camera: greenHumanView.cameras.battery
       }
     }
   },
   A: {
     code: "A",
+    number: "Design 02",
     label: "Vest-Mounted Exosuit",
     model: "assets/models/BLUE_v3-web.glb",
+    equipmentModel: "assets/models/BLUE_K-web.glb",
     modelLabel: "BLUE v3 · 3D design model",
-    reference: "assets/references/A-v3-reference.jpg",
+    reference: "assets/references/design-02-reference.png",
+    referenceWidth: 1598,
+    referenceHeight: 1118,
     sideReference: "assets/references/A-v3-side.jpg",
     referenceKind: "model",
-    referenceLabel: "Model reference",
-    referenceNote: "Front, back, and left-side views rendered from BLUE v3 with your selected soft studio lighting.",
+    referenceLabel: "Design reference",
+    referenceNote: "Front and rear three-quarter design views supplied by the designer.",
     alt: "Textured BLUE v3 semi-independent blue vest design, with a white carrier garment, rear assistance module, external chest battery, and front waist pouch.",
     theme: neutralTheme,
     hotspots: {
@@ -113,11 +109,11 @@ export const designs = {
     topics: {
       overview: {
         title: ["A contoured module,", "a shared vest."],
-        description: "A blue zip-front vest carries a separate rear module over work clothing. A front waist pouch, lateral thigh panels, and adjustable bands organize the upper and lower interfaces.",
-        principle: "Use the vest as a common support while preserving a readable interface around the flexible module.",
-        keywords: ["Shared carrier", "Contoured", "Semi-independent"],
-        contextTitle: "Proposed applications",
-        context: "Manufacturing, facility maintenance, and workshop tasks.",
+        description: "A front-opening vest carries the rear working region and overlaps a wide adjustable waist flap. Lateral strips extend along the outer hips to separately buckled thigh cuffs.",
+        principle: "Use a familiar garment opening and shared carrier while giving torso and thigh fit their own adjustments.",
+        keywords: ["Front opening", "Shared carrier", "Waist overlap"],
+        contextTitle: "Workwear reference",
+        context: "The Continuous Carrier and Care and Service Vest studies inform the front opening, mesh panels, chest-device placement and coordinated upper-to-lower fit.",
         camera: {
           target: "0m 0.49m 0m", orbit: "45deg 83deg 2.65m", fieldOfView: "33deg",
           mobile: {target: "0m 0.445m 0m", orbit: "45deg 83deg 2.95m"}
@@ -134,65 +130,66 @@ export const designs = {
       },
       cooling: {
         title: ["A central fan,", "distinct load paths."],
-        description: "A central fan and lower outlet sit on the external blue back panel. Separate posterior straps continue from the lower vest toward the thigh anchors.",
+        description: "The rear working region groups a central cooling fan and a lower airflow opening. Separate posterior straps continue toward the thigh interfaces so ventilation and transmission remain identifiable.",
         principle: "Let the fan, outlet, and load connections express their own roles within the assembly.",
         keywords: ["Central fan", "Lower outlet", "Posterior straps"],
-        contextTitle: "Detail to evaluate",
-        context: "Airflow through the rear module and clearance around the straps as the wearer bends.",
+        contextTitle: "Drawing reference",
+        context: "The concept drawing specifies a Ø 100 mm cooling fan and a 175 × 35 mm air intake. Airflow and clearance remain topics for further development.",
         camera: {target: "0m 0.715m -0.12m", orbit: "180deg 85deg 0.84m", fieldOfView: "33deg"}
       },
       anchors: {
         title: ["Long lateral panels,", "lower thigh anchors."],
-        description: "Narrow outer-thigh panels extend to lower anchor bands. The seat and the main front and rear thigh surfaces stay open.",
-        principle: "Continue the connection along the sides while giving each lower band a defined adjustment and attachment.",
-        keywords: ["Lateral support", "Lower bands", "Open seat"],
+        description: "Narrow side strips connect the shared vest to buckled thigh cuffs along the outer hips. The lower closures retain their own fitting adjustment while the seat remains open.",
+        principle: "Coordinate the lateral connection with independent cuff adjustment and clear attachment boundaries.",
+        keywords: ["Lateral connection", "Buckled cuffs", "Open seat"],
         contextTitle: "Detail to evaluate",
         context: "Panel rotation, contact pressure, and alignment between the posterior straps and lower anchors.",
         camera: {target: "0m 0.27m 0m", orbit: "130deg 83deg 1.4m", fieldOfView: "33deg"}
       },
       battery: {
         ...batteryTopic,
-        description: "The external battery sits on the wearer's left chest, with front-facing controls and a retaining band above the waist pouch.",
-        context: "The current model shows the battery housing and front controls. Docking, cable retention, and release access remain details to develop.",
+        description: "The chest battery occupies a defined front mount above the adjustable waist flap. Its front-facing controls and retention detail keep operation separate from dressing and fit adjustment.",
+        contextTitle: "Drawing reference",
+        context: "The drawing gives an 80 × 160 mm battery-module envelope and a 205 × 155 mm waist flap. Mounting, cable retention and release require further refinement.",
         camera: {target: "0.08m 0.775m 0.11m", orbit: "-20deg 83deg 0.84m", fieldOfView: "33deg"}
       }
     }
   },
   D: {
     code: "D",
+    number: "Design 03",
     label: "Garment-Integrated Exosuit",
-    model: "assets/models/D.glb",
-    reference: "assets/references/D-model-reference.jpg",
+    model: "assets/models/Orange_H-web.glb",
+    equipmentModel: "assets/models/ORANGE_K-web.glb",
+    reference: "assets/references/design-03-reference.png",
+    referenceWidth: 1556,
+    referenceHeight: 1112,
     sideReference: "assets/references/D-model-side.jpg",
     referenceKind: "model",
-    referenceLabel: "Schematic model reference",
-    referenceNote: "Front, back, and left-side views rendered from the schematic garment model with your selected soft studio lighting.",
-    alt: "Schematic orange side-opening tabard with an embedded rear textile working region, upper fan, and reinforced support shorts.",
+    referenceLabel: "Design reference",
+    referenceNote: "Front and rear three-quarter design views supplied by the designer.",
+    alt: "Orange garment-integrated exosuit and support shorts worn on a neutral human mannequin, with a rear working region, cooling fan and chest battery.",
     theme: neutralTheme,
-    hotspots: {
-      module: "0.1m 1.35m -0.178m",
-      cooling: "0m 1.49m -0.205m",
-      anchors: "0.14m 0.81m -0.125m",
-      battery: "0.135m 1.45m 0.185m"
-    },
+    hotspots: orangeHumanView.hotspots,
+    hotspotNormals: orangeHumanView.hotspotNormals,
     topics: {
       overview: {
         title: ["Assistance within", "the garment."],
-        description: "A side-opening tabard contains the protected working region within its layered back panel. Output bands continue through waist guides to support-shorts anchors.",
-        principle: "Build containment, positioning, and transmission routes into the garment construction.",
-        keywords: ["Embedded", "Layered textile", "Integrated anchors"],
-        contextTitle: "Proposed applications",
-        context: "Laundry, housekeeping, production stations, and hospital support logistics.",
+        description: "A side-fastening top pairs with wrapover support shorts. The working region sits within the layered back garment, while waist guides organize the transfer route toward adjustable thigh interfaces.",
+        principle: "Develop containment, entry and lower-body fitting as parts of a coordinated two-garment system.",
+        keywords: ["Layered top", "Support shorts", "Waist guides"],
+        contextTitle: "Garment references",
+        context: "The Tabard and Support Shorts structure combines side-opening servicewear with activewear cues, shoulder mesh and bound garment edges.",
         camera: overviewCamera
       },
       module: {
         title: ["Flexible volume", "within a back panel."],
-        description: "A shallow side section reserves space for the internal assembly. Continuous cloth, soft edges, and sewn transitions connect the working region to the tabard.",
+        description: "The embedded working region occupies the layered back panel, with continuous textile surfaces, soft edges and sewn transitions. The garment reserves internal volume for the flexible assembly.",
         principle: "Allow internal movement and contraction within a continuous garment construction.",
         keywords: ["Textile volume", "Continuous panel", "Sewn transitions"],
         contextTitle: "Detail to evaluate",
-        context: "Layer movement, usable internal space, and service access. The profile reference shows the intended thickness.",
-        camera: {target: "0m 1.35m -0.13m", orbit: "125deg 82deg 1.5m", fieldOfView: "33deg"}
+        context: "Internal layer movement, working clearance and component access need refinement. The mannequin view shows garment placement; Exosuit Only allows separate inspection of the equipment.",
+        camera: orangeHumanView.cameras.module
       },
       cooling: {
         title: ["Airflow through", "the back panel."],
@@ -201,18 +198,18 @@ export const designs = {
         keywords: ["Upper fan", "Integrated passage", "Lower mesh outlet"],
         contextTitle: "Detail to evaluate",
         context: "The internal air passage and textile clearance when the wearer bends or sits.",
-        camera: {target: "0m 1.32m -0.15m", orbit: "160deg 82deg 1.35m", fieldOfView: "33deg"}
+        camera: orangeHumanView.cameras.cooling
       },
       anchors: {
         title: ["Transmission guided", "into support shorts."],
-        description: "Passive output bands pass through waist guides and continue toward reinforced thigh hems in the openable shorts.",
-        principle: "Use the lower garment to organize the contact surfaces, guidance, and leg anchoring.",
-        keywords: ["Waist guides", "Reinforced hems", "Support shorts"],
+        description: "The support shorts bring the waist, seat and thigh contact regions into one lower garment. Transfer guides connect the upper working region to adjustable bands and defined thigh interfaces.",
+        principle: "Coordinate the transfer route with separately identifiable waist and thigh adjustments on the shorts.",
+        keywords: ["Waist guides", "Adjustable bands", "Support shorts"],
         contextTitle: "Detail to evaluate",
         context: "Alignment between the tabard and shorts, donning over work clothing, and pressure during movement.",
-        camera: {target: "0m 0.88m -0.03m", orbit: "145deg 85deg 1.4m", fieldOfView: "33deg"}
+        camera: orangeHumanView.cameras.anchors
       },
-      battery: batteryTopic
+      battery: {...batteryTopic, camera: orangeHumanView.cameras.battery}
     }
   }
 };

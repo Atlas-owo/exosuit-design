@@ -11,6 +11,7 @@ const contentTypes = {
   ".css": "text/css; charset=utf-8",
   ".glb": "model/gltf-binary",
   ".jpg": "image/jpeg",
+  ".png": "image/png",
   ".svg": "image/svg+xml",
   ".woff2": "font/woff2",
   ".md": "text/markdown; charset=utf-8"

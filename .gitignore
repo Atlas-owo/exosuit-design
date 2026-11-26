@@ -6,3 +6,8 @@ build/
 dist/assets/*.blend*
 dist/assets/BLUE_v1.glb
 dist/assets/三套配色_中文材质包/
+dist/assets/GREEN_K.glb
+dist/assets/BLUE_K.glb
+dist/assets/ORANGE_K.glb
+dist/assets/Orange_H.glb
+dist/assets/GREEN_v4.glb

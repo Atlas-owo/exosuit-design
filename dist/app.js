@@ -1,8 +1,11 @@
 import {designs} from "./designs.js";
 import {createLightingTool} from "./lighting.js";
+import {updateStudyNotes} from "./study.js";
+import {equipmentViews} from "./equipment-views.js";
 
 const viewer = document.querySelector("#model-viewer");
 const designTabs = [...document.querySelectorAll("[data-design]")];
+const modelVariantButtons = [...document.querySelectorAll("[data-model-variant]")];
 const topicButtons = [...document.querySelectorAll(".detail-button")];
 const viewButtons = [...document.querySelectorAll("[data-view]")];
 const hotspots = [...document.querySelectorAll(".hotspot")];
@@ -16,14 +19,21 @@ const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const narrowViewport = window.matchMedia("(max-width: 800px)");
 
 let selectedDesign = "B";
+let selectedModelVariant = "with-body";
 let selectedTopic = "overview";
 let selectedView = "overview";
 let referenceView = "front-rear";
 let loadingTimer;
+let cameraLimitTimer;
 const lightingTool = createLightingTool(viewer, designs, () => selectedDesign);
 
 function setText(selector, text) {
   document.querySelector(selector).textContent = text;
+}
+
+function activeModel() {
+  const design = designs[selectedDesign];
+  return selectedModelVariant === "with-body" ? design.model : design.equipmentModel;
 }
 
 function updateZoomEnabled() {
@@ -36,6 +46,7 @@ function updateZoomEnabled() {
 function updatePanel() {
   const design = designs[selectedDesign];
   lightingTool.selectDesign();
+  updateStudyNotes(selectedDesign, design);
   const topic = design.topics[selectedTopic];
   const rootStyle = document.documentElement.style;
   rootStyle.setProperty("--accent", design.theme.accent);
@@ -44,7 +55,7 @@ function updatePanel() {
   document.body.dataset.design = selectedDesign;
   document.body.dataset.topic = selectedTopic;
   document.querySelector("#design-panel").setAttribute("aria-labelledby", `tab-${selectedDesign}`);
-  setText("#detail-eyebrow", design.label.toUpperCase());
+  setText("#detail-eyebrow", `${design.number} · ${design.label}`);
   const heading = document.querySelector("#detail-title");
   heading.replaceChildren();
   topic.title.forEach((line, index) => {
@@ -56,19 +67,20 @@ function updatePanel() {
   setText("#principle-description", topic.principle);
   setText("#context-title", topic.contextTitle);
   setText("#context-description", topic.context);
-  const keywordList = document.querySelector("#keyword-list");
-  keywordList.replaceChildren(...topic.keywords.map(keyword => {
-    const item = document.createElement("li");
-    item.textContent = keyword;
-    return item;
-  }));
   const thumbnail = document.querySelector("#reference-thumbnail");
-  const showProfile = selectedTopic === "module" && selectedDesign === "D";
-  thumbnail.src = showProfile ? design.sideReference : design.reference;
-  thumbnail.alt = `${design.label} ${showProfile ? "left-profile" : "front and back"} ${design.referenceKind || "concept"} reference`;
-  setText(".reference-image-label", design.referenceLabel || "Concept reference");
-  viewer.alt = design.alt;
-  setText("#model-label", design.modelLabel || "Schematic 3D placeholder");
+  thumbnail.src = design.reference;
+  thumbnail.width = design.referenceWidth || 1600;
+  thumbnail.height = design.referenceHeight || 1100;
+  thumbnail.alt = `${design.label}, front and rear three-quarter design views`;
+  viewer.alt = selectedModelVariant === "with-body" ? design.alt : `${design.label}, exosuit only`;
+  const variantLabel = selectedModelVariant === "with-body" ? "Human + Exosuit" : "Exosuit Only";
+  setText("#model-label", `${design.number} · ${variantLabel}`);
+  modelVariantButtons.forEach(button => {
+    const active = button.dataset.modelVariant === selectedModelVariant;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+  document.body.dataset.modelVariant = selectedModelVariant;
   designTabs.forEach(button => {
     const active = button.dataset.design === selectedDesign;
     button.classList.toggle("is-active", active);
@@ -88,8 +100,12 @@ function updatePanel() {
 }
 
 function updateCamera(jump = false) {
+  clearTimeout(cameraLimitTimer);
+  if (!activeModel()) return;
   const design = designs[selectedDesign];
-  const topicCamera = design.topics[selectedTopic].camera;
+  const topicCamera = selectedModelVariant === "equipment-only"
+    ? equipmentViews[selectedDesign].cameras[selectedTopic]
+    : design.topics[selectedTopic].camera;
   const camera = {...topicCamera, ...(narrowViewport.matches ? topicCamera.mobile : {})};
   if (selectedTopic === "overview" && selectedView !== "overview") {
     const angles = design.viewAngles || {front: "0deg", back: "180deg", side: "90deg"};
@@ -97,18 +113,28 @@ function updateCamera(jump = false) {
   }
   // Keep the chosen framing at 1× and allow up to 2× zoom through camera distance.
   const radius = parseFloat(camera.orbit.trim().split(/\s+/).at(-1));
-  viewer.minCameraOrbit = `auto 20deg ${radius / 2}m`;
-  viewer.maxCameraOrbit = `auto 155deg ${radius}m`;
+  const immediate = jump || reducedMotion.matches || !viewer.loaded;
+  const currentRadius = viewer.getCameraOrbit?.().radius ?? radius;
+  const applyFinalLimits = () => {
+    viewer.minCameraOrbit = `auto 20deg ${radius / 2}m`;
+    viewer.maxCameraOrbit = `auto 155deg ${radius}m`;
+  };
+  // Let the current and destination distances coexist during the transition;
+  // clamping to the new zoom range first would snap between detail views.
+  viewer.minCameraOrbit = `auto 20deg ${immediate ? radius / 2 : Math.min(radius / 2, currentRadius)}m`;
+  viewer.maxCameraOrbit = `auto 155deg ${immediate ? radius : Math.max(radius, currentRadius)}m`;
+  viewer.setAttribute("interpolation-decay", reducedMotion.matches ? "0" : "180");
   viewer.minFieldOfView = camera.fieldOfView;
   viewer.maxFieldOfView = camera.fieldOfView;
   viewer.cameraTarget = camera.target;
   viewer.cameraOrbit = camera.orbit;
   viewer.fieldOfView = camera.fieldOfView;
-  if (jump || reducedMotion.matches) viewer.jumpCameraToGoal?.();
+  if (immediate) viewer.jumpCameraToGoal?.();
+  else cameraLimitTimer = window.setTimeout(applyFinalLimits, 1000);
 }
 
 function updateHotspots() {
-  const design = designs[selectedDesign];
+  const design = selectedModelVariant === "equipment-only" ? equipmentViews[selectedDesign] : designs[selectedDesign];
   const positions = design.hotspots;
   for (const button of hotspots) {
     const position = positions[button.dataset.topic];
@@ -129,6 +155,7 @@ function beginLoading() {
 }
 
 function finishLoading() {
+  if (!activeModel()) return;
   clearTimeout(loadingTimer);
   loadError.hidden = true;
   loadingOverlay.classList.add("is-complete");
@@ -137,20 +164,49 @@ function finishLoading() {
 }
 
 function showLoadError() {
+  if (!activeModel()) return;
   clearTimeout(loadingTimer);
   loadingOverlay.classList.add("is-complete");
   loadError.hidden = false;
 }
 
+function loadSelectedModel() {
+  clearTimeout(cameraLimitTimer);
+  const model = activeModel();
+  viewer.hidden = !model;
+  document.querySelector(".interaction-hint").hidden = !model;
+  if (!model) {
+    clearTimeout(loadingTimer);
+    loadingOverlay.classList.add("is-complete");
+    loadError.hidden = true;
+    viewer.removeAttribute("src");
+    return;
+  }
+  beginLoading();
+  viewer.setAttribute("src", model);
+  updateHotspots();
+  updateCamera(true);
+}
+
 function chooseDesign(code) {
   if (code === selectedDesign || !designs[code]) return;
   selectedDesign = code;
+  selectedTopic = "overview";
+  selectedView = "overview";
   updatePanel();
-  beginLoading();
-  viewer.src = designs[code].model;
-  updateHotspots();
-  updateCamera();
-  setText("#announcement", `${designs[code].label}. ${designs[code].topics[selectedTopic].title.join(" ")}`);
+  loadSelectedModel();
+  setText("#announcement", `${designs[code].number}. ${designs[code].label}. Overview.`);
+}
+
+function chooseModelVariant(variant) {
+  if (variant === selectedModelVariant || !["with-body", "equipment-only"].includes(variant)) return;
+  selectedModelVariant = variant;
+  selectedTopic = "overview";
+  selectedView = "overview";
+  updatePanel();
+  loadSelectedModel();
+  const label = variant === "with-body" ? "Human plus exosuit" : "Exosuit only";
+  setText("#announcement", `${label}. Overview.${activeModel() ? "" : " No model uploaded."}`);
 }
 
 function chooseTopic(topic) {
@@ -177,12 +233,14 @@ function chooseView(view) {
 
 function updateReference() {
   const design = designs[selectedDesign];
-  setText("#reference-dialog-kicker", "DESIGN REFERENCE");
+  setText("#reference-dialog-kicker", `${design.number} · Design reference`);
   setText("#reference-dialog-title", design.label);
   const image = document.querySelector("#reference-full-image");
   image.src = referenceView === "side" ? design.sideReference : design.reference;
-  image.alt = `${design.label} ${referenceView === "side" ? "left profile" : "front and back"} ${design.referenceKind || "concept"} render`;
-  setText(".reference-footnote", design.referenceNote || "Design concept render. The interactive model uses schematic geometry.");
+  image.alt = `${design.label}, ${referenceView === "side" ? "left profile model render" : "front and rear three-quarter design views"}`;
+  setText(".reference-footnote", referenceView === "side"
+    ? "Left-side view rendered from the human and exosuit model with your selected studio lighting."
+    : design.referenceNote);
   for (const button of document.querySelectorAll("[data-reference-view]")) {
     const active = button.dataset.referenceView === referenceView;
     button.classList.toggle("is-active", active);
@@ -191,12 +249,13 @@ function updateReference() {
 }
 
 function openReference() {
-  referenceView = selectedTopic === "module" && selectedDesign === "D" ? "side" : "front-rear";
+  referenceView = "front-rear";
   updateReference();
   referenceDialog.showModal();
 }
 
 designTabs.forEach(button => button.addEventListener("click", () => chooseDesign(button.dataset.design)));
+modelVariantButtons.forEach(button => button.addEventListener("click", () => chooseModelVariant(button.dataset.modelVariant)));
 document.querySelector(".design-tabs").addEventListener("keydown", event => {
   const keys = ["ArrowRight", "ArrowLeft", "Home", "End"];
   if (!keys.includes(event.key)) return;
@@ -254,6 +313,7 @@ viewer.addEventListener("load", finishLoading);
 narrowViewport.addEventListener("change", () => updateCamera(true));
 viewer.addEventListener("error", showLoadError);
 viewer.addEventListener("progress", event => {
+  if (!activeModel()) return;
   document.querySelector("#loading-bar").style.width = `${Math.round(event.detail.totalProgress * 100)}%`;
   if (!loadingOverlay.classList.contains("is-complete")) {
     clearTimeout(loadingTimer);
@@ -261,11 +321,13 @@ viewer.addEventListener("progress", event => {
   }
 });
 document.querySelector("#retry-button").addEventListener("click", () => {
+  const model = activeModel();
+  if (!model) return;
   beginLoading();
-  viewer.src = `${designs[selectedDesign].model}?retry=${Date.now()}`;
+  viewer.setAttribute("src", `${model}?retry=${Date.now()}`);
 });
 
-zoomToggle.checked = false;
+zoomToggle.checked = true;
 updateZoomEnabled();
 updatePanel();
 beginLoading();
