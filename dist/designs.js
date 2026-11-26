@@ -1,8 +1,10 @@
 // Per-design model, camera and hotspot settings.
 // Camera targets and hotspot positions use metres in each GLB's coordinate system.
+const neutralTheme = {accent: "#646464", dark: "#373737", soft: "#f0f0f0"};
+
 export const overviewCamera = {
   target: "0m 1.06m 0m",
-  orbit: "145deg 83deg 3.65m",
+  orbit: "45deg 83deg 3.65m",
   fieldOfView: "33deg"
 };
 
@@ -19,15 +21,17 @@ const batteryTopic = {
 export const designs = {
   B: {
     code: "B",
-    label: "Open",
+    label: "Modular Harness Exosuit",
     model: "assets/models/GREEN_v3-web.glb",
     modelLabel: "GREEN v3 · 3D design model",
-    cameraLimits: {min: "auto 20deg 0.2m", max: "auto 155deg 4.5m"},
     viewAngles: {front: "0deg", back: "180deg", side: "90deg"},
-    reference: "assets/references/B-reference.jpg",
-    sideReference: "assets/references/B-side.jpg",
+    reference: "assets/references/B-v3-reference.jpg",
+    sideReference: "assets/references/B-v3-side.jpg",
+    referenceKind: "model",
+    referenceLabel: "Model reference",
+    referenceNote: "Front, back, and left-side views rendered from GREEN v3 with your selected soft studio lighting.",
     alt: "Textured GREEN v3 open-harness exosuit with two independent rear textile modules, local fans, adjustable chest straps, and separate thigh cuffs over white work clothing.",
-    theme: {accent: "#607347", dark: "#435532", soft: "#edf1e7"},
+    theme: neutralTheme,
     hotspots: {
       module: "0.07m 0.76m -0.144m",
       cooling: "0.065m 0.59m -0.144m",
@@ -49,8 +53,8 @@ export const designs = {
         contextTitle: "Proposed applications",
         context: "Warehouse picking, event installation, and horticulture.",
         camera: {
-          target: "0m 0.49m 0m", orbit: "145deg 83deg 2.65m", fieldOfView: "33deg",
-          mobile: {target: "0m 0.445m 0m", orbit: "145deg 83deg 2.95m"}
+          target: "0m 0.49m 0m", orbit: "45deg 83deg 2.65m", fieldOfView: "33deg",
+          mobile: {target: "0m 0.445m 0m", orbit: "45deg 83deg 2.95m"}
         }
       },
       module: {
@@ -90,14 +94,16 @@ export const designs = {
   },
   A: {
     code: "A",
-    label: "Semi-open",
+    label: "Vest-Mounted Exosuit",
     model: "assets/models/BLUE_v3-web.glb",
     modelLabel: "BLUE v3 · 3D design model",
-    cameraLimits: {min: "auto 20deg 0.2m", max: "auto 155deg 4.5m"},
-    reference: "assets/references/A-reference.jpg",
-    sideReference: "assets/references/A-side.jpg",
+    reference: "assets/references/A-v3-reference.jpg",
+    sideReference: "assets/references/A-v3-side.jpg",
+    referenceKind: "model",
+    referenceLabel: "Model reference",
+    referenceNote: "Front, back, and left-side views rendered from BLUE v3 with your selected soft studio lighting.",
     alt: "Textured BLUE v3 semi-independent blue vest design, with a white carrier garment, rear assistance module, external chest battery, and front waist pouch.",
-    theme: {accent: "#3b6c89", dark: "#294e64", soft: "#eaf1f5"},
+    theme: neutralTheme,
     hotspots: {
       module: "0.075m 0.815m -0.13m",
       cooling: "0m 0.715m -0.14m",
@@ -113,8 +119,8 @@ export const designs = {
         contextTitle: "Proposed applications",
         context: "Manufacturing, facility maintenance, and workshop tasks.",
         camera: {
-          target: "0m 0.49m 0m", orbit: "145deg 83deg 2.65m", fieldOfView: "33deg",
-          mobile: {target: "0m 0.445m 0m", orbit: "145deg 83deg 2.95m"}
+          target: "0m 0.49m 0m", orbit: "45deg 83deg 2.65m", fieldOfView: "33deg",
+          mobile: {target: "0m 0.445m 0m", orbit: "45deg 83deg 2.95m"}
         }
       },
       module: {
@@ -154,12 +160,15 @@ export const designs = {
   },
   D: {
     code: "D",
-    label: "Embedded",
+    label: "Garment-Integrated Exosuit",
     model: "assets/models/D.glb",
-    reference: "assets/references/D-reference.jpg",
-    sideReference: "assets/references/D-side.jpg",
+    reference: "assets/references/D-model-reference.jpg",
+    sideReference: "assets/references/D-model-side.jpg",
+    referenceKind: "model",
+    referenceLabel: "Schematic model reference",
+    referenceNote: "Front, back, and left-side views rendered from the schematic garment model with your selected soft studio lighting.",
     alt: "Schematic orange side-opening tabard with an embedded rear textile working region, upper fan, and reinforced support shorts.",
-    theme: {accent: "#ad6243", dark: "#80472f", soft: "#f7eee9"},
+    theme: neutralTheme,
     hotspots: {
       module: "0.1m 1.35m -0.178m",
       cooling: "0m 1.49m -0.205m",

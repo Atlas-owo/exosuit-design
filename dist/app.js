@@ -1,4 +1,5 @@
 import {designs} from "./designs.js";
+import {createLightingTool} from "./lighting.js";
 
 const viewer = document.querySelector("#model-viewer");
 const designTabs = [...document.querySelectorAll("[data-design]")];
@@ -10,6 +11,7 @@ const loadError = document.querySelector("#load-error");
 const referenceDialog = document.querySelector("#reference-dialog");
 const aboutDialog = document.querySelector("#about-dialog");
 const fullscreenButton = document.querySelector("#fullscreen-button");
+const zoomToggle = document.querySelector("#zoom-toggle");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const narrowViewport = window.matchMedia("(max-width: 800px)");
 
@@ -18,13 +20,22 @@ let selectedTopic = "overview";
 let selectedView = "overview";
 let referenceView = "front-rear";
 let loadingTimer;
+const lightingTool = createLightingTool(viewer, designs, () => selectedDesign);
 
 function setText(selector, text) {
   document.querySelector(selector).textContent = text;
 }
 
+function updateZoomEnabled() {
+  viewer.toggleAttribute("disable-zoom", !zoomToggle.checked);
+  document.querySelectorAll("[data-zoom-hint]").forEach(hint => {
+    hint.hidden = !zoomToggle.checked;
+  });
+}
+
 function updatePanel() {
   const design = designs[selectedDesign];
+  lightingTool.selectDesign();
   const topic = design.topics[selectedTopic];
   const rootStyle = document.documentElement.style;
   rootStyle.setProperty("--accent", design.theme.accent);
@@ -33,7 +44,7 @@ function updatePanel() {
   document.body.dataset.design = selectedDesign;
   document.body.dataset.topic = selectedTopic;
   document.querySelector("#design-panel").setAttribute("aria-labelledby", `tab-${selectedDesign}`);
-  setText("#detail-eyebrow", `${design.label.toUpperCase()} INTEGRATION · DESIGN ${selectedDesign}`);
+  setText("#detail-eyebrow", design.label.toUpperCase());
   const heading = document.querySelector("#detail-title");
   heading.replaceChildren();
   topic.title.forEach((line, index) => {
@@ -54,7 +65,8 @@ function updatePanel() {
   const thumbnail = document.querySelector("#reference-thumbnail");
   const showProfile = selectedTopic === "module" && selectedDesign === "D";
   thumbnail.src = showProfile ? design.sideReference : design.reference;
-  thumbnail.alt = `Design ${selectedDesign} ${showProfile ? "left-profile" : "front and back"} concept reference`;
+  thumbnail.alt = `${design.label} ${showProfile ? "left-profile" : "front and back"} ${design.referenceKind || "concept"} reference`;
+  setText(".reference-image-label", design.referenceLabel || "Concept reference");
   viewer.alt = design.alt;
   setText("#model-label", design.modelLabel || "Schematic 3D placeholder");
   designTabs.forEach(button => {
@@ -83,8 +95,12 @@ function updateCamera(jump = false) {
     const angles = design.viewAngles || {front: "0deg", back: "180deg", side: "90deg"};
     camera.orbit = camera.orbit.replace(/^\S+/, angles[selectedView]);
   }
-  viewer.minCameraOrbit = design.cameraLimits?.min || "auto 20deg 0.35m";
-  viewer.maxCameraOrbit = design.cameraLimits?.max || "auto 155deg 5m";
+  // Keep the chosen framing at 1× and allow up to 2× zoom through camera distance.
+  const radius = parseFloat(camera.orbit.trim().split(/\s+/).at(-1));
+  viewer.minCameraOrbit = `auto 20deg ${radius / 2}m`;
+  viewer.maxCameraOrbit = `auto 155deg ${radius}m`;
+  viewer.minFieldOfView = camera.fieldOfView;
+  viewer.maxFieldOfView = camera.fieldOfView;
   viewer.cameraTarget = camera.target;
   viewer.cameraOrbit = camera.orbit;
   viewer.fieldOfView = camera.fieldOfView;
@@ -134,7 +150,7 @@ function chooseDesign(code) {
   viewer.src = designs[code].model;
   updateHotspots();
   updateCamera();
-  setText("#announcement", `${designs[code].label} integration, Design ${code}. ${designs[code].topics[selectedTopic].title.join(" ")}`);
+  setText("#announcement", `${designs[code].label}. ${designs[code].topics[selectedTopic].title.join(" ")}`);
 }
 
 function chooseTopic(topic) {
@@ -161,11 +177,12 @@ function chooseView(view) {
 
 function updateReference() {
   const design = designs[selectedDesign];
-  setText("#reference-dialog-kicker", `DESIGN ${selectedDesign}`);
-  setText("#reference-dialog-title", `${design.label} integration`);
+  setText("#reference-dialog-kicker", "DESIGN REFERENCE");
+  setText("#reference-dialog-title", design.label);
   const image = document.querySelector("#reference-full-image");
   image.src = referenceView === "side" ? design.sideReference : design.reference;
-  image.alt = `Design ${selectedDesign} ${referenceView === "side" ? "left profile" : "front and back"} concept render`;
+  image.alt = `${design.label} ${referenceView === "side" ? "left profile" : "front and back"} ${design.referenceKind || "concept"} render`;
+  setText(".reference-footnote", design.referenceNote || "Design concept render. The interactive model uses schematic geometry.");
   for (const button of document.querySelectorAll("[data-reference-view]")) {
     const active = button.dataset.referenceView === referenceView;
     button.classList.toggle("is-active", active);
@@ -218,6 +235,7 @@ document.querySelectorAll("dialog").forEach(dialog => {
 });
 
 fullscreenButton.hidden = !document.fullscreenEnabled;
+zoomToggle.addEventListener("change", updateZoomEnabled);
 fullscreenButton.addEventListener("click", async () => {
   try {
     if (document.fullscreenElement) await document.exitFullscreen();
@@ -247,6 +265,8 @@ document.querySelector("#retry-button").addEventListener("click", () => {
   viewer.src = `${designs[selectedDesign].model}?retry=${Date.now()}`;
 });
 
+zoomToggle.checked = false;
+updateZoomEnabled();
 updatePanel();
 beginLoading();
 customElements.whenDefined("model-viewer").then(() => {

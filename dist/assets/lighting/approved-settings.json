@@ -1,0 +1,56 @@
+{
+  "schema": "sartexo-lighting-studio-v1",
+  "environment": "Neutral Gaussian softbox, studioHDR in dist/lighting.js",
+  "coordinates": "Y up; +Z front; +X right; azimuth 0 front, +90 right; distances in model heights",
+  "renderer": {
+    "toneMapping": "neutral",
+    "shadowSoftness": 1
+  },
+  "designs": {
+    "Modular Harness Exosuit": {
+      "azimuth": -27,
+      "elevation": 49,
+      "distance": 3.2,
+      "size": 8,
+      "strength": 1.95,
+      "fill": 0.6,
+      "exposure": 0.95,
+      "shadow": 0.11,
+      "positionInModelHeights": [
+        -0.953102612576135,
+        2.415070656712871,
+        1.8705692002663286
+      ]
+    },
+    "Vest-Mounted Exosuit": {
+      "azimuth": -17,
+      "elevation": 70,
+      "distance": 1.7,
+      "size": 8,
+      "strength": 1.9,
+      "fill": 0.4,
+      "exposure": 0.62,
+      "shadow": 0,
+      "positionInModelHeights": [
+        -0.16999492100118893,
+        1.597477455336044,
+        0.5560283324857433
+      ]
+    },
+    "Garment-Integrated Exosuit": {
+      "azimuth": -35,
+      "elevation": 40,
+      "distance": 3,
+      "size": 4,
+      "strength": 1.4,
+      "fill": 0.4,
+      "exposure": 0.78,
+      "shadow": 0.15,
+      "positionInModelHeights": [
+        -1.318155125312115,
+        1.9283628290596178,
+        1.8825206147913995
+      ]
+    }
+  }
+}

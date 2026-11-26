@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f9fbf8">
-  <meta name="description" content="Explore open, semi-open and embedded soft exosuit designs through interactive 3D models and guided detail views.">
-  <title>wearable exosuit visual design</title>
+  <meta name="theme-color" content="#fafafa">
+  <meta name="description" content="Compare Modular Harness Exosuit, Vest-Mounted Exosuit and Garment-Integrated Exosuit through interactive 3D models and guided detail views.">
+  <title>Wearable Exosuit Visual Design</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/dm-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
@@ -20,17 +20,17 @@
   </header>
   <main class="page-shell" id="explorer">
     <section class="intro" aria-labelledby="page-title">
-      <h1 id="page-title">wearable exosuit visual design</h1>
+      <h1 id="page-title">Wearable Exosuit Visual Design</h1>
     </section>
     <nav class="design-tabs" role="tablist" aria-label="Integration approach">
       <button id="tab-B" class="design-tab is-active" role="tab" type="button" data-design="B" aria-selected="true" aria-controls="design-panel">
-        <span><strong>Open</strong><small>Independent modules</small></span><span class="design-code">B</span>
+        <span><strong>Modular Harness Exosuit</strong><small>Independent modules</small></span>
       </button>
       <button id="tab-A" class="design-tab" role="tab" type="button" data-design="A" aria-selected="false" aria-controls="design-panel" tabindex="-1">
-        <span><strong>Semi-open</strong><small>A shared vest carrier</small></span><span class="design-code">A</span>
+        <span><strong>Vest-Mounted Exosuit</strong><small>A shared vest carrier</small></span>
       </button>
       <button id="tab-D" class="design-tab" role="tab" type="button" data-design="D" aria-selected="false" aria-controls="design-panel" tabindex="-1">
-        <span><strong>Embedded</strong><small>Integrated into the garment</small></span><span class="design-code">D</span>
+        <span><strong>Garment-Integrated Exosuit</strong><small>Integrated into the garment</small></span>
       </button>
     </nav>
     <div class="workspace">
@@ -43,10 +43,12 @@
         </div>
         <model-viewer id="model-viewer" src="assets/models/GREEN_v3-web.glb"
           alt="Textured GREEN v3 open-harness exosuit with independent rear modules and thigh cuffs."
-          camera-controls disable-pan interaction-prompt="none" touch-action="pan-y"
-          camera-orbit="145deg 83deg 2.65m" camera-target="0m 0.49m 0m" field-of-view="33deg"
-          min-camera-orbit="auto 20deg 0.2m" max-camera-orbit="auto 155deg 4.5m"
-          shadow-intensity="0.55" shadow-softness="1" exposure="1.05" tone-mapping="neutral"
+          camera-controls disable-pan disable-zoom interaction-prompt="none" touch-action="pan-y"
+          camera-orbit="45deg 83deg 2.65m" camera-target="0m 0.49m 0m" field-of-view="33deg"
+          min-camera-orbit="auto 20deg 1.325m" max-camera-orbit="auto 155deg 2.65m"
+          min-field-of-view="33deg" max-field-of-view="33deg"
+          environment-image="assets/lighting/B-studio.hdr"
+          shadow-intensity="0.11" shadow-softness="1" exposure="0.95" tone-mapping="neutral"
           interpolation-decay="90" loading="eager">
           <button class="hotspot" slot="hotspot-module" type="button" data-topic="module" data-position="0.07m 0.76m -0.144m" data-normal="0m 0m -1m" data-visibility-attribute="visible" aria-label="Explore the muscle module"><span aria-hidden="true">+</span><span class="hotspot-label">Muscle module</span></button>
           <button class="hotspot" slot="hotspot-cooling" type="button" data-topic="cooling" data-position="0.065m 0.59m -0.144m" data-normal="0m 0m -1m" data-visibility-attribute="visible" aria-label="Explore cooling and output"><span aria-hidden="true">+</span><span class="hotspot-label">Cooling &amp; output</span></button>
@@ -56,49 +58,73 @@
         <div class="loading-overlay" id="loading-overlay" role="status"><span class="spinner" aria-hidden="true"></span><span>Preparing the 3D model</span><span class="progress-track"><span id="loading-bar"></span></span></div>
         <div class="load-error" id="load-error" role="alert" hidden><strong>The 3D model could not load.</strong><p>You can still explore its design reference.</p><button id="retry-button" class="primary-button" type="button">Try again</button></div>
         <div class="viewer-bottom">
-          <div class="view-presets" role="group" aria-label="Model viewpoints">
-            <button class="view-button is-active" type="button" data-view="overview" aria-pressed="true">Overview</button>
-            <button class="view-button" type="button" data-view="front" aria-pressed="false">Front</button>
-            <button class="view-button" type="button" data-view="back" aria-pressed="false">Back</button>
-            <button class="view-button" type="button" data-view="side" aria-pressed="false">Left side</button>
-            <span class="preset-divider" aria-hidden="true"></span>
-            <button id="reset-button" class="icon-button reset-button" type="button" aria-label="Reset model view" title="Reset view"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1.6 7.1M4 4v6h6"/></svg></button>
-          </div>
-          <p class="interaction-hint"><span class="desktop-hint">Drag to rotate <span>·</span> Scroll to zoom</span><span class="touch-hint">Drag to rotate <span>·</span> Pinch to zoom</span></p>
+          <p class="interaction-hint"><span class="desktop-hint">Drag to rotate<span data-zoom-hint hidden><span>·</span> Scroll to zoom</span></span><span class="touch-hint">Drag to rotate<span data-zoom-hint hidden><span>·</span> Pinch to zoom</span></span></p>
         </div>
       </section>
       <aside class="detail-panel" id="design-panel" role="tabpanel" aria-labelledby="tab-B" tabindex="0">
-        <p class="detail-eyebrow" id="detail-eyebrow">OPEN INTEGRATION · DESIGN B</p>
+        <p class="detail-eyebrow" id="detail-eyebrow">MODULAR HARNESS EXOSUIT</p>
         <h2 id="detail-title">Independent modules,<br>an open harness.</h2>
         <p class="detail-description" id="detail-description">Two protected textile modules connect individually to a shoulder harness and high thigh cuffs. Open chest and side areas keep the carrier visually light.</p>
         <div class="principle-block"><h3 id="principle-title">Design principle</h3><p id="principle-description">Keep each module, attachment, and fit adjustment identifiable.</p></div>
         <ul id="keyword-list" class="keyword-list" aria-label="Design keywords"><li>Modular</li><li>Adjustable</li><li>Open coverage</li></ul>
         <div class="reference-block">
-          <button id="reference-preview" class="reference-preview" type="button" aria-label="Open design reference images"><img id="reference-thumbnail" src="assets/references/B-reference.jpg" alt="Design B front and back concept reference" width="1200" height="800"><span class="reference-image-label">Concept reference</span><span class="reference-expand" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M8 4H4v4m12-4h4v4M4 16v4h4m12-4v4h-4"/></svg></span></button>
+          <button id="reference-preview" class="reference-preview" type="button" aria-label="Open design reference images"><img id="reference-thumbnail" src="assets/references/B-v3-reference.jpg" alt="GREEN v3 front and back model reference" width="1600" height="1100"><span class="reference-image-label">Model reference</span><span class="reference-expand" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M8 4H4v4m12-4h4v4M4 16v4h4m12-4v4h-4"/></svg></span></button>
           <button id="reference-open" class="reference-caption" type="button"><span>View the design reference</span></button>
         </div>
         <div class="context-block"><h3 id="context-title">Proposed applications</h3><p id="context-description">Warehouse picking, event installation, and horticulture.</p></div>
       </aside>
     </div>
-    <nav class="detail-navigation" aria-label="Explore model details"><span class="detail-nav-label">Explore</span><div class="detail-buttons">
-      <button class="detail-button is-active" type="button" data-topic="overview" aria-pressed="true">Overview</button>
+    <nav class="detail-navigation" aria-label="Model views and details"><div class="detail-buttons">
+      <button class="view-button is-active" type="button" data-view="overview" aria-pressed="true">Overview</button>
+      <button class="view-button" type="button" data-view="front" aria-pressed="false">Front</button>
+      <button class="view-button" type="button" data-view="back" aria-pressed="false">Back</button>
+      <button class="view-button" type="button" data-view="side" aria-pressed="false">Left side</button>
       <button class="detail-button" type="button" data-topic="module" aria-pressed="false">Muscle module</button>
       <button class="detail-button" type="button" data-topic="cooling" aria-pressed="false">Cooling &amp; output</button>
       <button class="detail-button" type="button" data-topic="anchors" aria-pressed="false">Thigh anchors</button>
       <button class="detail-button" type="button" data-topic="battery" aria-pressed="false">Battery mount</button>
+      <button id="reset-button" class="icon-button reset-button" type="button" aria-label="Reset model view" title="Reset view"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1.6 7.1M4 4v6h6"/></svg></button>
     </div></nav>
-    <footer class="site-footer"><p>Open, semi-open, and embedded integration.</p><button class="text-button about-trigger" type="button">About the models</button></footer>
+    <details class="lighting-tool">
+      <summary>Lighting studio <span>Temporary tool</span></summary>
+      <div class="lighting-body">
+        <p class="lighting-description">Adjust the soft studio light. Each design remembers its own settings in this browser. Copy the settings when you are ready to render.</p>
+        <label class="zoom-control" for="zoom-toggle">
+          <span><strong>Enable zoom</strong><small id="zoom-description">Off by default · Allow scroll or pinch to zoom from 1× to 2×.</small></span>
+          <input id="zoom-toggle" type="checkbox" role="switch" aria-describedby="zoom-description" autocomplete="off">
+        </label>
+        <div class="lighting-controls">
+          <label class="lighting-control" for="light-azimuth"><span>Light direction <output for="light-azimuth" data-light-output="azimuth"></output></span><input id="light-azimuth" data-light="azimuth" type="range" min="-180" max="180" step="1" value="-35"><small>0° front · ±180° back · +90° right</small></label>
+          <label class="lighting-control" for="light-elevation"><span>Elevation <output for="light-elevation" data-light-output="elevation"></output></span><input id="light-elevation" data-light="elevation" type="range" min="0" max="90" step="1" value="40"><small>0° at eye level · 90° overhead</small></label>
+          <label class="lighting-control" for="light-distance"><span>Light distance <output for="light-distance" data-light-output="distance"></output></span><input id="light-distance" data-light="distance" type="range" min="1.5" max="8" step="0.1" value="3"><small>Relative to the model height</small></label>
+          <label class="lighting-control" for="light-size"><span>Light size / softness <output for="light-size" data-light-output="size"></output></span><input id="light-size" data-light="size" type="range" min="0.3" max="8" step="0.1" value="4"><small>A larger light makes broader, softer highlights</small></label>
+          <label class="lighting-control" for="light-strength"><span>Key light <output for="light-strength" data-light-output="strength"></output></span><input id="light-strength" data-light="strength" type="range" min="0" max="6" step="0.05" value="1.4"></label>
+          <label class="lighting-control" for="light-fill"><span>Ambient fill <output for="light-fill" data-light-output="fill"></output></span><input id="light-fill" data-light="fill" type="range" min="0" max="1.5" step="0.05" value="0.4"></label>
+          <label class="lighting-control" for="light-exposure"><span>Overall brightness <output for="light-exposure" data-light-output="exposure"></output></span><input id="light-exposure" data-light="exposure" type="range" min="0.2" max="1.5" step="0.01" value="0.78"></label>
+          <label class="lighting-control" for="light-shadow"><span>Ground shadow <output for="light-shadow" data-light-output="shadow"></output></span><input id="light-shadow" data-light="shadow" type="range" min="0" max="0.6" step="0.01" value="0.15"></label>
+        </div>
+        <p id="lighting-position" class="lighting-position"></p>
+        <div class="lighting-actions">
+          <button id="lighting-copy" class="lighting-button" type="button">Copy all settings</button>
+          <button id="lighting-download" class="lighting-button" type="button">Download settings</button>
+          <button id="lighting-hdr" class="lighting-button" type="button">Download current HDR</button>
+          <button id="lighting-reset" class="lighting-button" type="button">Reset to approved lighting</button>
+        </div>
+        <p id="lighting-status" class="lighting-status" role="status" aria-live="polite"></p>
+        <textarea id="lighting-export" class="lighting-export" aria-label="Lighting settings to copy" readonly hidden></textarea>
+      </div>
+    </details>
   </main>
   <dialog class="reference-dialog" id="reference-dialog" aria-labelledby="reference-dialog-title">
-    <div class="dialog-header"><div><p class="eyebrow" id="reference-dialog-kicker">DESIGN B</p><h2 id="reference-dialog-title">Open integration</h2></div><button class="icon-button close-dialog" type="button" aria-label="Close reference images"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <div class="dialog-header"><div><p class="eyebrow" id="reference-dialog-kicker">DESIGN REFERENCE</p><h2 id="reference-dialog-title">Modular Harness Exosuit</h2></div><button class="icon-button close-dialog" type="button" aria-label="Close reference images"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
     <div class="reference-view-switch" role="group" aria-label="Reference view"><button class="reference-view-button is-active" data-reference-view="front-rear" type="button" aria-pressed="true">Front &amp; back</button><button class="reference-view-button" data-reference-view="side" type="button" aria-pressed="false">Left profile</button></div>
-    <div class="reference-full-frame"><img id="reference-full-image" src="assets/references/B-reference.jpg" alt="Design B front and back concept render"></div><p class="reference-footnote">Design concept render. The open design uses GREEN v3, the semi-open design uses BLUE v3, and the embedded design uses schematic geometry.</p>
+    <div class="reference-full-frame"><img id="reference-full-image" src="assets/references/B-v3-reference.jpg" alt="GREEN v3 front and back model render"></div><p class="reference-footnote">Front, back, and left-side views rendered from GREEN v3 with your selected soft studio lighting.</p>
   </dialog>
   <dialog class="about-dialog" id="about-dialog" aria-labelledby="about-title">
     <div class="dialog-header"><div><p class="eyebrow">ABOUT THE STUDY</p><h2 id="about-title">Three levels of integration.</h2></div><button class="icon-button close-dialog" type="button" aria-label="Close study information"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
     <p>This study explores how a protected textile assistance assembly connects to its carrier and to the wearer.</p>
-    <dl class="about-designs"><div><dt>Open · B</dt><dd>Individually bounded modules attach to an open, adjustable harness.</dd></div><div><dt>Semi-open · A</dt><dd>A contoured external module mounts on a shared vest carrier.</dd></div><div><dt>Embedded · D</dt><dd>The working region sits within the layered back garment panel.</dd></div></dl>
-    <h3>About the interactive models</h3><p>The open design uses the textured GREEN v3 model, and the semi-open design uses BLUE v3. The embedded design uses a purpose-built schematic placeholder. The reference images communicate the exterior design intent.</p><p>Active length, contraction travel, cooling, and fit remain under development. Application examples describe proposed uses for evaluation.</p>
+    <dl class="about-designs"><div><dt>Modular Harness Exosuit</dt><dd>Individually bounded modules attach to an open, adjustable harness.</dd></div><div><dt>Vest-Mounted Exosuit</dt><dd>A contoured external module mounts on a shared vest carrier.</dd></div><div><dt>Garment-Integrated Exosuit</dt><dd>The working region sits within the layered back garment panel.</dd></div></dl>
+    <h3>About the interactive models</h3><p>Modular Harness Exosuit uses the textured GREEN v3 model, and Vest-Mounted Exosuit uses BLUE v3. Garment-Integrated Exosuit uses a purpose-built schematic placeholder. The reference images communicate the exterior design intent.</p><p>Active length, contraction travel, cooling, and fit remain under development. Application examples describe proposed uses for evaluation.</p>
     <a class="notes-link" href="assets/SARTEXO_Design_Directions.md" download>Download the design notes</a>
   </dialog>
   <div class="sr-only" id="announcement" role="status" aria-live="polite"></div>
